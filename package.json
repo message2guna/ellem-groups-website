@@ -1,0 +1,23 @@
+{
+  "name": "ellem-groups-website",
+  "version": "1.0.0",
+  "description": "Professional website for Ellem Groups - Foundry, Engineering, and Fluid Control",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "next": "^13.0.0",
+    "framer-motion": "^10.16.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0"
+  }
+}

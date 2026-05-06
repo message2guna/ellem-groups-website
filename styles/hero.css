@@ -1,0 +1,102 @@
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%);
+  color: var(--bg-white);
+  padding: 8rem 0;
+  text-align: center;
+}
+
+.hero-content h1 {
+  color: var(--accent);
+  margin-bottom: 1.5rem;
+  animation: slideInDown 0.8s ease;
+}
+
+.hero-content p {
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2rem;
+  animation: slideInUp 0.8s ease 0.2s both;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  animation: slideInUp 0.8s ease 0.4s both;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 0.8rem 2rem;
+  border-radius: 4px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: #f0a900;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(248, 181, 0, 0.3);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--accent);
+  border: 2px solid var(--accent);
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 4rem 0;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1.1rem;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
