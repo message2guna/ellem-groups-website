@@ -29,16 +29,8 @@
       line-height: 1.6;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    button {
-      cursor: pointer;
-      border: none;
-      font-family: inherit;
-    }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; font-family: inherit; }
 
     .container {
       max-width: 1200px;
@@ -46,21 +38,28 @@
       padding: 0 2rem;
     }
 
-    /* Navbar */
     .navbar {
-      background-color: var(--primary);
-      color: var(--bg-white);
-      padding: 1rem 0;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+      color: var(--text-dark);
+      padding: 0;
       position: sticky;
       top: 0;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 4px 20px rgba(31, 58, 95, 0.12);
+      border-bottom: 3px solid var(--accent);
+      min-height: 80px;
+      display: flex;
+      align-items: center;
     }
 
     .navbar-content {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      width: 100%;
+      gap: 3rem;
+      padding: 1rem 2rem;
+      height: 80px;
     }
 
     .navbar-logo {
@@ -74,14 +73,22 @@
       display: flex;
       gap: 2rem;
       list-style: none;
+      flex-wrap: nowrap;
+      align-items: center;
+      height: 100%;
+      margin: 0;
     }
 
     .navbar-menu a {
-      color: var(--bg-white);
-      font-weight: 500;
-      transition: color 0.3s ease;
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
       padding: 0.5rem 0;
-      border-bottom: 2px solid transparent;
+      border-bottom: 3px solid transparent;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      height: 100%;
     }
 
     .navbar-menu a:hover {
@@ -89,7 +96,71 @@
       border-bottom-color: var(--accent);
     }
 
-    /* Hero */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      border-bottom: 3px solid transparent;
+      font-size: 0.95rem;
+      height: 100%;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      min-width: 250px;
+      padding: 0.5rem 0;
+      list-style: none;
+      margin-top: 0.5rem;
+      display: none;
+      z-index: 1001;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--primary);
+      font-weight: 500;
+      border-bottom: none;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%);
+      color: var(--accent);
+      border-bottom: none;
+    }
+
     .hero {
       background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%);
       color: var(--bg-white);
@@ -111,17 +182,10 @@
     }
 
     @keyframes slideInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Section */
     .section {
       padding: 4rem 0;
     }
@@ -141,12 +205,20 @@
       margin-bottom: 1rem;
     }
 
+    .section-title h3 {
+      font-size: 1.8rem;
+      color: var(--primary);
+      border-bottom: 3px solid var(--secondary);
+      padding-bottom: 1rem;
+      margin-bottom: 2rem;
+      margin-top: 3rem;
+    }
+
     .section-title p {
       font-size: 1.1rem;
       color: var(--text-light);
     }
 
-    /* Grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -154,7 +226,123 @@
       margin: 2rem 0;
     }
 
-    /* Card */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin: 2rem 0;
+      width: 100%;
+    }
+    
+    @supports (display: grid) {
+      @media (max-width: 1200px) {
+        .products-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .products-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      
+      @media (max-width: 480px) {
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+
+    .product-card {
+      background: var(--bg-white);
+      border: none;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+      box-shadow: 0 4px 15px rgba(31, 58, 95, 0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+      min-height: 380px;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, var(--accent), var(--secondary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .product-card:hover {
+      transform: translateY(-12px);
+      box-shadow: 0 20px 40px rgba(31, 58, 95, 0.15);
+    }
+
+    .product-card:hover::before {
+      opacity: 1;
+    }
+
+    .product-image {
+      width: 100%;
+      height: 280px;
+      background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 1.5rem;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+    }
+
+    .product-card:hover .product-image img {
+      transform: scale(1.08) rotate(2deg);
+    }
+
+    .product-content {
+      padding: 2rem 1.5rem;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-category {
+      display: none;
+    }
+
+    .product-content h4 {
+      color: var(--primary);
+      margin-bottom: 0.8rem;
+      margin-top: 0;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      line-height: 1.3;
+    }
+
+    .product-content p {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.5;
+      flex-grow: 1;
+      margin: 0;
+    }
+
     .card {
       background: var(--bg-white);
       border: 1px solid var(--border);
@@ -162,115 +350,9 @@
       overflow: hidden;
       transition: all 0.3s ease;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-      border-color: var(--secondary);
-    }
-
-    .card-image {
-      width: 100%;
-      height: 200px;
-      background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 3rem;
-      color: var(--text-light);
-    }
-
-    .card-content {
       padding: 2rem;
     }
 
-    .card-content h3 {
-      color: var(--primary);
-      margin-bottom: 0.8rem;
-    }
-
-    .card-content p {
-      color: var(--text-light);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      margin-bottom: 1.5rem;
-    }
-
-    .card-link {
-      display: inline-block;
-      color: var(--secondary);
-      font-weight: 600;
-      transition: all 0.3s ease;
-      padding-bottom: 0.3rem;
-      border-bottom: 2px solid transparent;
-    }
-
-    .card-link:hover {
-      border-bottom-color: var(--secondary);
-      padding-left: 0.3rem;
-    }
-
-    /* Products Grid */
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2rem;
-      margin: 2rem 0;
-    }
-
-    .product-card {
-      background: var(--bg-white);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    .product-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-    }
-
-    .product-image {
-      width: 100%;
-      height: 180px;
-      background: linear-gradient(135deg, var(--bg-light) 0%, #f0f0f0 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-    }
-
-    .product-content {
-      padding: 1.5rem;
-    }
-
-    .product-category {
-      display: inline-block;
-      background-color: var(--accent);
-      color: var(--primary);
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-    }
-
-    .product-content h4 {
-      color: var(--primary);
-      margin-bottom: 0.5rem;
-      margin-top: 0;
-      font-size: 1rem;
-    }
-
-    .product-content p {
-      font-size: 0.85rem;
-      color: var(--text-light);
-    }
-
-    /* Footer */
     .footer {
       background-color: var(--primary);
       color: var(--bg-white);
@@ -335,16 +417,25 @@
     }
 
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
+      .hero h1 { font-size: 2rem; }
+      .section-title h2 { font-size: 1.8rem; }
+      .navbar-menu { display: none; }
+      /* About strengths responsive */
+      .about-strengths {
+        grid-template-columns: 1fr !important;
       }
-
-      .section-title h2 {
-        font-size: 1.8rem;
+      /* Vision Mission Quality responsive */
+      .about-vision-mission-quality {
+        grid-template-columns: 1fr !important;
       }
-
-      .navbar-menu {
-        display: none;
+    }
+    
+    @media (max-width: 480px) {
+      .product-card {
+        min-height: 340px;
+      }
+      .product-image {
+        height: 240px;
       }
     }
   </style>
@@ -353,62 +444,684 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="container navbar-content">
-      <div class="navbar-logo">ELLEM</div>
+      <a href="#home" style="display: flex; align-items: center; justify-content: center; gap: 0; flex-shrink: 0; margin: 0; padding: 0; height: 100%;">
+        <img src="./images/logo.png" alt="Ellem Groups Logo" style="height: 70px; width: auto; display: block; object-fit: contain;">
+      </a>
       <ul class="navbar-menu">
         <li><a href="#home">Home</a></li>
+        <li><a href="#companies">About</a></li>
+        <li class="dropdown">
+          <span class="dropdown-toggle">Facilities ▼</span>
+          <ul class="dropdown-menu">
+            <li><a href="foundry.html">🏭 Ellem Foundry</a></li>
+            <li><a href="engineering.html">⚙️ Ellem Engineering</a></li>
+            <li><a href="fluid-control.html">🔧 Fluid Control Valves And Components</a></li>
+          </ul>
+        </li>
+        <li><a href="#capabilities">Capabilities</a></li>
+        <li><a href="#industries">Industries</a></li>
         <li><a href="#products">Products</a></li>
-        <li><a href="#companies">Companies</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li style="display: flex; align-items: center; height: 100%;">
+          <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; font-weight: 700; transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1); display: inline-flex; align-items: center; font-size: 0.9rem; white-space: nowrap; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.4); letter-spacing: 0.3px; text-transform: uppercase;">
+            📥 BROCHURE
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
 
-  <!-- Hero -->
-  <section class="hero" id="home">
+  <!-- Carousel/Slider Banner Section -->
+  <section id="home" style="position: relative; height: 700px; overflow: hidden; background: #000;">
+    <!-- Carousel Wrapper -->
+    <div class="carousel-wrapper" style="position: relative; width: 100%; height: 100%;">
+      
+      <!-- Slide 1: EXPERTISE & GLOBAL TRUST -->
+      <div class="carousel-slide active-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f8f9fa 0%, #f0f2f5 100%); position: absolute; width: 100%; opacity: 1; transition: opacity 0.8s ease;">
+        <div style="padding: 6rem 4rem; z-index: 2;">
+          <div style="max-width: 500px;">
+            <h2 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; color: var(--primary);">
+              <span style="color: var(--accent); display: block; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">26+ YEARS</span>
+              OF MANUFACTURING
+              <span style="color: var(--secondary);"> EXCELLENCE</span>
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">
+              Trusted globally for precision valve components and advanced industrial solutions. Setting industry standards with cutting-edge technology and unwavering commitment to quality.
+            </p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <a href="#products" style="background: var(--accent); color: white; padding: 0.9rem 2rem; border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);">
+                EXPLORE PRODUCTS
+              </a>
+              <a href="#contact" style="background: transparent; color: var(--primary); padding: 0.9rem 2rem; border: 2px solid var(--primary); border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s;">
+                GET QUOTE
+              </a>
+              <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: linear-gradient(135deg, #f8b500 0%, #d4a017 100%); color: white; padding: 0.9rem 2rem; border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);">
+                📥 GET BROCHURE
+              </a>
+            </div>
+          </div>
+        </div>
+        <div style="position: relative; height: 100%; overflow: hidden; background: white; display: flex; align-items: center; justify-content: center;">
+          <img src="./images/banner1-manufacturing.png" alt="Precision Manufacturing" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(248, 181, 0, 0.05), rgba(212, 160, 23, 0.05));"></div>
+        </div>
+      </div>
+
+      <!-- Slide 2: PRECISION ENGINEERING -->
+      <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f0f2f5 0%, #f8f9fa 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
+        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0f2ff 0%, #e0e7ff 100%); order: 2;">
+          <img src="./images/banner2-control-system.png" alt="Engineering Excellence" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(31, 58, 95, 0.08), rgba(42, 79, 122, 0.08));"></div>
+        </div>
+        <div style="padding: 4rem 4rem; z-index: 2;">
+          <div style="max-width: 500px;">
+            <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
+              <span style="color: var(--accent);">PRECISION</span><br>ENGINEERING
+              <span style="color: var(--secondary);"> REFINED</span>
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">
+              Advanced CNC machining and state-of-the-art manufacturing capabilities delivering components with micron-level accuracy. Serving oil & gas, chemical, power, and automotive industries worldwide.
+            </p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> ISO 9001 & API Certified</li>
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> Advanced CNC Technology</li>
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> Quality Assurance</li>
+            </ul>
+            <a href="#companies" style="background: var(--secondary); color: white; padding: 0.8rem 1.8rem; border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s;">
+              Learn More →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: SUSTAINABILITY & INNOVATION -->
+      <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f8f9fa 0%, #f0f2f5 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
+        <div style="padding: 4rem 4rem; z-index: 2;">
+          <div style="max-width: 500px;">
+            <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
+              <span style="color: var(--accent);">INDUSTRIAL</span><br>INFRASTRUCTURE
+              <span style="color: var(--secondary);"> SOLUTIONS</span>
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">
+              Comprehensive solutions for complex industrial systems. From valve assembly to integration, we provide end-to-end manufacturing expertise that keeps industries operational worldwide.
+            </p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> Complete System Integration</li>
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> Pressure Tested Components</li>
+              <li style="margin-bottom: 0.8rem; font-size: 1rem; color: var(--text-dark);"><strong style="color: var(--accent);">✓</strong> Global Supply Chain</li>
+            </ul>
+          </div>
+        </div>
+        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #f0ffe0 0%, #e8f5e9 100%);">
+          <img src="./images/banner3-industrial.png" alt="Industrial Solutions" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(31, 58, 95, 0.08), rgba(42, 79, 122, 0.08));"></div>
+        </div>
+      </div>
+
+      <!-- Slide 4: ADVANCED MANUFACTURING CAPABILITIES -->
+      <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f0f2f5 0%, #f8f9fa 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
+        <div style="padding: 4rem 4rem; z-index: 2;">
+          <div style="max-width: 500px;">
+            <h2 style="font-size: 2.8rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
+              <span style="color: var(--accent);">WORLD-CLASS</span><br>MANUFACTURING
+              <span style="color: var(--secondary);"> PROWESS</span>
+            </h2>
+            <p style="font-size: 1.1rem; color: var(--text-light); margin-bottom: 2rem; line-height: 1.8;">
+              State-of-the-art machinery and skilled craftspeople delivering precision components at scale. Our manufacturing excellence transforms raw materials into industry-leading products serving global markets.
+            </p>
+            <ul style="list-style: none; margin-bottom: 2rem;">
+            </ul>
+            <a href="#capabilities" style="background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);">
+              View Capabilities →
+            </a>
+          </div>
+        </div>
+        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0e7ff 0%, #f0e7ff 100%);">
+          <img src="./images/banner4-equipment.png" alt="Manufacturing Excellence" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
+          <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(248, 181, 0, 0.1), rgba(212, 160, 23, 0.1));"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div style="position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; z-index: 100;">
+      <button onclick="changeSlide(0)" class="carousel-dot active-dot" style="width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: none; cursor: pointer; transition: all 0.3s;"></button>
+      <button onclick="changeSlide(1)" class="carousel-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; transition: all 0.3s;"></button>
+      <button onclick="changeSlide(2)" class="carousel-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; transition: all 0.3s;"></button>
+      <button onclick="changeSlide(3)" class="carousel-dot" style="width: 12px; height: 12px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; transition: all 0.3s;"></button>
+    </div>
+
+    <!-- Auto-play Script -->
+    <script>
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.carousel-dot');
+      
+      function showSlide(n) {
+        slides.forEach(slide => {
+          slide.style.opacity = '0';
+          slide.classList.remove('active-slide');
+        });
+        dots.forEach(dot => {
+          dot.style.background = 'rgba(255,255,255,0.5)';
+          dot.classList.remove('active-dot');
+        });
+        
+        slides[n].style.opacity = '1';
+        slides[n].classList.add('active-slide');
+        dots[n].style.background = 'var(--accent)';
+        dots[n].classList.add('active-dot');
+      }
+      
+      function changeSlide(n) {
+        currentSlide = n;
+        showSlide(currentSlide);
+      }
+      
+      function nextSlide() {
+        currentSlide = (currentSlide + 1) % slides.length;
+        showSlide(currentSlide);
+      }
+      
+      // Auto-advance slides every 6 seconds
+      setInterval(nextSlide, 6000);
+    </script>
+  </section>
+
+  <!-- About Section -->
+  <section class="section" id="companies" style="background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 100%); padding: 4rem 0;">
     <div class="container">
-      <h1>Ellem Groups</h1>
-      <p>Excellence in Foundry, Precision Engineering & Fluid Control</p>
+      <!-- About Section Header -->
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="color: var(--primary); font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem;">About Ellem Groups</h2>
+        <p style="color: var(--accent); font-size: 1.1rem; font-weight: 600;">26 years of Engineering Excellence and Quality</p>
+      </div>
+
+      <!-- About Section Content -->
+      <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); border-radius: 16px; overflow: hidden; margin-bottom: 4rem; box-shadow: 0 12px 40px rgba(31, 58, 95, 0.2); padding: 3rem;">
+        <p style="color: rgba(255,255,255,0.95); font-size: 1.05rem; line-height: 1.9; margin-bottom: 2rem; max-width: 100%;">
+          Established with a commitment to excellence, <strong>Ellem Groups</strong> brings <strong>26 years of industry expertise</strong> in precision valve components and advanced manufacturing solutions. We are recognized market leaders serving diverse sectors globally.
+        </p>
+        <ul style="list-style: none; margin: 0; padding: 0; color: rgba(255,255,255,0.9); margin-bottom: 2rem;">
+          <li style="margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem;">
+            <span style="color: var(--accent); font-weight: bold; flex-shrink: 0;">✓</span>
+            <span><strong>ISO 9001 & API Certified</strong> – Meeting international quality standards</span>
+          </li>
+          <li style="margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem;">
+            <span style="color: var(--accent); font-weight: bold; flex-shrink: 0;">✓</span>
+            <span><strong>Cutting-Edge Technology</strong> – State-of-the-art machinery & CNC systems</span>
+          </li>
+          <li style="margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem;">
+            <span style="color: var(--accent); font-weight: bold; flex-shrink: 0;">✓</span>
+            <span><strong>Global Reach</strong> – Serving Oil & Gas, Chemical, Power & Automotive sectors</span>
+          </li>
+          <li style="margin-bottom: 0.8rem; font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem;">
+            <span style="color: var(--accent); font-weight: bold; flex-shrink: 0;">✓</span>
+            <span><strong>Precision Excellence</strong> – Micron-level accuracy in every product</span>
+          </li>
+          <li style="font-size: 0.95rem; display: flex; align-items: flex-start; gap: 0.8rem;">
+            <span style="color: var(--accent); font-weight: bold; flex-shrink: 0;">✓</span>
+            <span><strong>Quality Commitment</strong> – Exceeding international standards consistently</span>
+          </li>
+        </ul>
+
+        <!-- Strengths Cards Inside About Box -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem;">
+          <div style="background: rgba(255,255,255,0.95); padding: 1.5rem; border-radius: 8px; border-left: 5px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Engineering Excellence</h4>
+            <p style="color: var(--text-light); line-height: 1.6; font-size: 0.9rem; margin: 0;">
+              Advanced CNC machining technology combined with skilled craftsmanship delivers precision components with micron-level accuracy. Our robust infrastructure supports seamless production, quality testing, and continuous R&D.
+            </p>
+          </div>
+          <div style="background: rgba(255,255,255,0.95); padding: 1.5rem; border-radius: 8px; border-left: 5px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Industry Standards Compliance</h4>
+            <p style="color: var(--text-light); line-height: 1.6; font-size: 0.9rem; margin: 0;">
+              Specialized in safety relief valves compliant with API 520, 521, and 526 standards. Our products exceed international quality benchmarks and serve Oil & Gas, Petrochemical, Power Generation, Chemical & Pharmaceutical sectors.
+            </p>
+          </div>
+        </div>
+
+        <!-- Vision, Mission, Quality Policy Section -->
+        <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
+          <div class="about-vision-mission-quality" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+            <!-- Vision -->
+            <div style="background: rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 8px; border-left: 4px solid rgba(248, 181, 0, 0.6);">
+              <h4 style="color: var(--accent); font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Our Vision</h4>
+              <p style="color: rgba(255,255,255,0.9); line-height: 1.5; font-size: 0.85rem; margin: 0;">
+                Share the wisdom and wealth for the welfare of external and internal customers, business associates and society at large.
+              </p>
+            </div>
+            <!-- Mission -->
+            <div style="background: rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 8px; border-left: 4px solid rgba(212, 160, 23, 0.6);">
+              <h4 style="color: var(--accent); font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Our Mission</h4>
+              <p style="color: rgba(255,255,255,0.9); line-height: 1.5; font-size: 0.85rem; margin: 0;">
+                Innovation, Improvement and Institutionalization shall be the pillars of our business. Providing world-class products to meet local and global market needs.
+              </p>
+            </div>
+            <!-- Quality Policy -->
+            <div style="background: rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 8px; border-left: 4px solid rgba(248, 181, 0, 0.6);">
+              <h4 style="color: var(--accent); font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Quality Policy</h4>
+              <p style="color: rgba(255,255,255,0.9); line-height: 1.5; font-size: 0.85rem; margin: 0;">
+                World-class manufacturing producing high-quality components at affordable cost. On-time delivery with precision and reliability for customers globally.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title" style="margin-bottom: 3rem;">
+        <h2 style="font-size: 2.2rem; color: var(--primary);">Our Manufacturing <span style="color: var(--accent);">Facilities</span></h2>
+        <p style="font-size: 1rem; color: var(--text-light);">Three centers of excellence delivering precision, innovation, and world-class manufacturing</p>
+      </div>
+
+      <!-- Companies Grid -->
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); transition: all 0.3s ease; border-top: 5px solid var(--accent); hover:shadow-lg;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0,0,0,0.12)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; this.style.transform='translateY(0)'">
+          <div style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6cc 100%); padding: 2.5rem; text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">🏭</div>
+            <h3 style="color: var(--primary); margin-bottom: 0.3rem; font-size: 1.6rem; font-weight: 700;">Ellem Foundry</h3>
+            <p style="color: var(--accent); font-weight: 600; font-size: 0.95rem; margin: 0;">Precision Casting Excellence</p>
+          </div>
+          <div style="padding: 2.5rem;">
+            <p style="color: var(--text-dark); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem;">
+              Advanced die casting and foundry operations producing high-precision components for demanding industrial applications. Our expertise in metal casting ensures superior quality and reliability in every product.
+            </p>
+            <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.2rem;">
+              <p style="color: var(--text-light); font-size: 0.85rem; margin: 0 0 0.5rem 0;"><strong style="color: var(--primary);">🎯 Specialization:</strong></p>
+              <p style="color: var(--text-dark); font-size: 0.9rem; margin: 0;">Die Casting • Investment Casting • Quality Assurance</p>
+            </div>
+            <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.3rem;"><strong>📍 Location:</strong></p>
+            <p style="color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1.5rem;">Cosmafun Foundry, Cluster Park-1, Arasur West, Coimbatore - 641407</p>
+            <a href="foundry.html" style="background: var(--accent); color: white; padding: 0.65rem 1.5rem; border-radius: 5px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 2px 8px rgba(212, 160, 23, 0.2);">
+              Learn More →
+            </a>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); transition: all 0.3s ease; border-top: 5px solid var(--accent); hover:shadow-lg;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0,0,0,0.12)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; this.style.transform='translateY(0)'">
+          <div style="background: linear-gradient(135deg, #e6f7f5 0%, #ccf0ed 100%); padding: 2.5rem; text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">⚙️</div>
+            <h3 style="color: var(--primary); margin-bottom: 0.3rem; font-size: 1.6rem; font-weight: 700;">Ellem Engineering</h3>
+            <p style="color: var(--accent); font-weight: 600; font-size: 0.95rem; margin: 0;">CNC Precision Manufacturing</p>
+          </div>
+          <div style="padding: 2.5rem;">
+            <p style="color: var(--text-dark); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem;">
+              State-of-the-art CNC machining facility delivering precision components with micron-level accuracy. Our advanced technology and expert team ensure superior surface finish and dimensional perfection.
+            </p>
+            <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.2rem;">
+              <p style="color: var(--text-light); font-size: 0.85rem; margin: 0 0 0.5rem 0;"><strong style="color: var(--primary);">🎯 Specialization:</strong></p>
+              <p style="color: var(--text-dark); font-size: 0.9rem; margin: 0;">CNC Turning • VMC • VTL • Precision Components</p>
+            </div>
+            <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.3rem;"><strong>📍 Location:</strong></p>
+            <p style="color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1.5rem;">Sree Maruthi Industrial Estate, Chinnavedampatti, Coimbatore - 641 049</p>
+            <a href="engineering.html" style="background: var(--accent); color: white; padding: 0.65rem 1.5rem; border-radius: 5px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 2px 8px rgba(212, 160, 23, 0.2);">
+              Learn More →
+            </a>
+          </div>
+        </div>
+
+        <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); transition: all 0.3s ease; border-top: 5px solid var(--accent); hover:shadow-lg;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0,0,0,0.12)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; this.style.transform='translateY(0)'">
+          <div style="background: linear-gradient(135deg, #f5e6f7 0%, #ebccf0 100%); padding: 2.5rem; text-align: center;">
+            <div style="font-size: 3.5rem; margin-bottom: 1rem;">🔧</div>
+            <h3 style="color: var(--primary); margin-bottom: 0.3rem; font-size: 1.6rem; font-weight: 700;">Fluid Control Valves And Components</h3>
+            <p style="color: var(--accent); font-weight: 600; font-size: 0.95rem; margin: 0;">Complete Valve Solutions</p>
+          </div>
+          <div style="padding: 2.5rem;">
+            <p style="color: var(--text-dark); line-height: 1.8; margin-bottom: 1.5rem; font-size: 0.95rem;">
+              Complete assembly, testing, and quality verification of precision valve systems. We deliver dispatch-ready products that meet the most stringent international standards for reliable performance.
+            </p>
+            <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%); padding: 1.2rem; border-radius: 8px; margin-bottom: 1.2rem;">
+              <p style="color: var(--text-light); font-size: 0.85rem; margin: 0 0 0.5rem 0;"><strong style="color: var(--primary);">🎯 Specialization:</strong></p>
+              <p style="color: var(--text-dark); font-size: 0.9rem; margin: 0;">Valve Assembly • Testing & QC • Dispatch Ready</p>
+            </div>
+            <p style="color: var(--text-light); font-size: 0.85rem; margin-bottom: 0.3rem;"><strong>📍 Location:</strong></p>
+            <p style="color: var(--text-dark); font-size: 0.85rem; margin-bottom: 1.5rem;">Anjugam Nagar, Udayampalayam, Chinnavedampatti, Coimbatore - 641049</p>
+            <a href="fluid-control.html" style="background: var(--accent); color: white; padding: 0.65rem 1.5rem; border-radius: 5px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 2px 8px rgba(212, 160, 23, 0.2);">
+              Learn More →
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Key Highlights -->
+      <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%); padding: 2.5rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-bottom: 3rem;">
+        <h4 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Our Core Strengths</h4>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">ISO 9001 & API Certified</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">International quality standards</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">Global Presence</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">Serving multiple countries worldwide</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">Advanced Technology</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">State-of-the-art CNC machinery</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">Expert Team</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">Decades of collective expertise</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">Quality Assurance</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">Rigorous testing & control</p>
+            </div>
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <div style="font-size: 1.8rem; color: var(--accent);">✓</div>
+            <div>
+              <p style="color: var(--primary); font-weight: 600; margin: 0 0 0.3rem 0;">Sustainability</p>
+              <p style="color: var(--text-light); font-size: 0.9rem; margin: 0;">Eco-friendly manufacturing</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Brochure CTA with Dual Actions -->
+      <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); padding: 3.5rem; border-radius: 12px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(31, 58, 95, 0.2);">
+        <div style="position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: rgba(248, 181, 0, 0.05); border-radius: 50%;"></div>
+        <div style="position: absolute; bottom: -30%; left: -10%; width: 250px; height: 250px; background: rgba(248, 181, 0, 0.03); border-radius: 50%;"></div>
+        <div style="position: relative; z-index: 1;">
+          <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem; font-weight: 700;">Ready to Start Your Project?</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2.5rem; max-width: 700px; margin-left: auto; margin-right: auto;">
+            Partner with Ellem Groups for precision manufacturing excellence. Contact our experts today or download our comprehensive brochure to explore our capabilities.
+          </p>
+          <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <a href="#contact" style="background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%); color: white; padding: 1rem 2.5rem; border-radius: 5px; font-weight: 700; display: inline-block; transition: all 0.3s; box-shadow: 0 6px 16px rgba(212, 160, 23, 0.4); font-size: 1.05rem; letter-spacing: 0.5px;">
+              📞 Contact Our Experts
+            </a>
+            <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: white; color: var(--primary); padding: 1rem 2.5rem; border-radius: 5px; font-weight: 700; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); font-size: 1.05rem; letter-spacing: 0.5px;">
+              📥 Download Brochure
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Companies Section -->
-  <section class="section" id="companies">
+  <!-- Machinery & Materials Section -->
+  <section class="section" id="capabilities" style="background: linear-gradient(to bottom, #ffffff 0%, #f9f9f9 100%); padding: 4rem 0; border-top: 1px solid #e0e0e0;">
     <div class="container">
-      <div class="section-title">
-        <h2>Our Companies</h2>
-        <p>Three specialized units delivering excellence in manufacturing</p>
+      <div style="text-align: center; margin-bottom: 4rem;">
+        <h2 style="font-size: 2.8rem; color: var(--primary); margin-bottom: 1rem;">
+          <span style="color: var(--accent);">MACHINERY</span> & MATERIALS
+        </h2>
+        <p style="font-size: 1.1rem; color: var(--text-light); max-width: 700px; margin: 0 auto;">
+          State-of-the-art equipment powered by cutting-edge technology. Sourced from the best manufacturers worldwide to deliver exceptional precision and quality.
+        </p>
       </div>
-      <div class="grid">
-        <div class="card">
-          <div class="card-image">🏭</div>
-          <div class="card-content">
-            <h3>Ellem Foundry</h3>
-            <p>Specialized in die casting and foundry operations. Producing high-quality castings with precision and reliability.</p>
-            <p><strong>Location:</strong> Cosmafun Foundry, Cluster Park-1, Arasur West, Coimbatore - 641407</p>
-            <a href="#" class="card-link">Learn More →</a>
+
+      <!-- Machinery Section -->
+      <div style="margin-bottom: 4rem;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">OUR MACHINERY</span> CAPABILITIES
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1rem;">Precision equipment for advanced manufacturing operations</p>
+
+        <!-- Machinery Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+          <!-- CNC Turning -->
+          <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--accent); transition: all 0.3s;">
+            <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); padding: 1.5rem; color: white;">
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">CNC TURNING</h4>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Precision Turning Operations</p>
+            </div>
+            <div style="padding: 2rem;">
+              <table style="width: 100%; font-size: 0.95rem; line-height: 1.8;">
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; font-weight: 600; color: var(--primary);">Number of Machines</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">6 Nos.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Standard Turning Diameter</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">580 mm</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Length</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">1120 mm</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Chuck Size</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">500 mm</td>
+                </tr>
+              </table>
+              <p style="margin: 1.5rem 0 0 0; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: var(--text-light); font-size: 0.9rem;">High-precision turning for cylindrical and conical components with tight tolerances.</p>
+            </div>
+          </div>
+
+          <!-- VMC (Vertical Machining Centers) -->
+          <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--secondary); transition: all 0.3s;">
+            <div style="background: linear-gradient(135deg, var(--secondary) 0%, #b8860b 100%); padding: 1.5rem; color: white;">
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">VERTICAL MACHINING CENTERS</h4>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">VMC Operations</p>
+            </div>
+            <div style="padding: 2rem;">
+              <table style="width: 100%; font-size: 0.95rem; line-height: 1.8;">
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; font-weight: 600; color: var(--primary);">Number of Machines</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">4 Nos.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">X-Axis Travel</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">2500 mm</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Y-Axis Travel</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">1000 mm</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Z-Axis Travel</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">1200 mm</td>
+                </tr>
+              </table>
+              <p style="margin: 1.5rem 0 0 0; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: var(--text-light); font-size: 0.9rem;">Multi-axis machining for complex components with exceptional surface finish.</p>
+            </div>
+          </div>
+
+          <!-- VTL (Vertical Turning Lathes) -->
+          <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--accent); transition: all 0.3s;">
+            <div style="background: linear-gradient(135deg, #2a6f5c 0%, #1f4d3f 100%); padding: 1.5rem; color: white;">
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">VERTICAL TURNING LATHES</h4>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">VTL Operations</p>
+            </div>
+            <div style="padding: 2rem;">
+              <table style="width: 100%; font-size: 0.95rem; line-height: 1.8;">
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; font-weight: 600; color: var(--primary);">Number of Machines</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">2 Nos.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Max Swing Diameter</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">850 mm</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Max Turning Length</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">800 mm</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Chuck Size</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">500 mm</td>
+                </tr>
+              </table>
+              <p style="margin: 1.5rem 0 0 0; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: var(--text-light); font-size: 0.9rem;">Heavy-duty turning for large diameter components with precision accuracy.</p>
+            </div>
+          </div>
+
+          <!-- DIE CASTING MACHINES (Foundry) -->
+          <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid #ff6b35; transition: all 0.3s;">
+            <div style="background: linear-gradient(135deg, #ff6b35 0%, #d95a2e 100%); padding: 1.5rem; color: white;">
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">🏭 DIE CASTING MACHINES</h4>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Ellem Foundry</p>
+            </div>
+            <div style="padding: 2rem;">
+              <table style="width: 100%; font-size: 0.95rem; line-height: 1.8;">
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; font-weight: 600; color: var(--primary);">Number of Machines</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">12 Nos.</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Pressure Range</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">250 to 1200 Tons</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Type</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">Hot & Cold Chamber</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Capability</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">Aluminum, Zinc Alloys</td>
+                </tr>
+              </table>
+              <p style="margin: 1.5rem 0 0 0; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: var(--text-light); font-size: 0.9rem;">High-pressure die casting for precision components with dimensional accuracy up to ±0.1mm.</p>
+            </div>
+          </div>
+
+          <!-- PRESSURE TESTING EQUIPMENT (FCV) -->
+          <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid #0066cc; transition: all 0.3s;">
+            <div style="background: linear-gradient(135deg, #0066cc 0%, #004499 100%); padding: 1.5rem; color: white;">
+              <h4 style="margin: 0; font-size: 1.3rem; font-weight: 700;">🔧 PRESSURE TESTING SYSTEMS</h4>
+              <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9;">Fluid Control Valves & Components</p>
+            </div>
+            <div style="padding: 2rem;">
+              <table style="width: 100%; font-size: 0.95rem; line-height: 1.8;">
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; font-weight: 600; color: var(--primary);">Testing Workstations</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">20+ Stations</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Pressure Range</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">500 to 1000+ PSI</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #e0e0e0;">
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Testing Methods</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">Hydro & Pneumatic</td>
+                </tr>
+                <tr>
+                  <td style="padding: 0.5rem 0; color: var(--text-light);">Special Testing</td>
+                  <td style="padding: 0.5rem 0; text-align: right; color: var(--text-dark);">Helium Leak, Cryogenic</td>
+                </tr>
+              </table>
+              <p style="margin: 1.5rem 0 0 0; padding-top: 1rem; border-top: 1px solid #e0e0e0; color: var(--text-light); font-size: 0.9rem;">Comprehensive valve assembly and testing for 100% quality compliance with API standards.</p>
+            </div>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-image">⚙️</div>
-          <div class="card-content">
-            <h3>Ellem Engineering</h3>
-            <p>Precision manufacturing with CNC machines including turning, VMC, and VTL. Expert in material precision.</p>
-            <p><strong>Location:</strong> Sree Maruthi Industrial Estate, Coimbatore - 641 049</p>
-            <p><strong>📱 +91 98430 52005 | +91 98431 52005</strong></p>
-            <a href="#" class="card-link">Learn More →</a>
+        <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.1) 0%, rgba(212, 160, 23, 0.1) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); text-align: center;">
+          <p style="color: var(--primary); font-weight: 600; margin: 0; font-size: 1.05rem;">
+            ✓ ISO 9001 Certified Equipment | ✓ Regular Maintenance | ✓ Precision Calibration | ✓ Expert Operators
+          </p>
+        </div>
+      </div>
+
+      <!-- Materials Section -->
+      <div style="margin-top: 4rem; padding-top: 4rem; border-top: 2px solid #e0e0e0;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">MATERIALS</span> WE WORK WITH
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1rem;">Industry-grade materials sourced from premium suppliers worldwide</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <!-- Stainless Steel -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">🔩 Stainless Steel</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">All grades available including:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ Bar stock</li>
+              <li style="padding: 0.4rem 0;">✓ Castings</li>
+              <li style="padding: 0.4rem 0;">✓ Forgings</li>
+              <li style="padding: 0.4rem 0;">✓ Investment Castings</li>
+            </ul>
+          </div>
+
+          <!-- Carbon Steel -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">⚡ Carbon Steel</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">Comprehensive range available:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ Bar stock & Castings</li>
+              <li style="padding: 0.4rem 0;">✓ Forgings</li>
+              <li style="padding: 0.4rem 0;">✓ Cast Iron</li>
+              <li style="padding: 0.4rem 0;">✓ Investment Castings</li>
+            </ul>
+          </div>
+
+          <!-- Copper -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #b8860b;">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">🔸 Copper</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">Multiple varieties:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ OFHC & ETP Copper</li>
+              <li style="padding: 0.4rem 0;">✓ Copper-Nickel</li>
+              <li style="padding: 0.4rem 0;">✓ Bar stock</li>
+              <li style="padding: 0.4rem 0;">✓ Castings & Forgings</li>
+            </ul>
+          </div>
+
+          <!-- Aluminium -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">⬜ Aluminium</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">Premium grades in stock:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ Rods & Plates</li>
+              <li style="padding: 0.4rem 0;">✓ Grades 2024-7075</li>
+              <li style="padding: 0.4rem 0;">✓ Castings (HPDC & GDC)</li>
+              <li style="padding: 0.4rem 0;">✓ Investment Castings</li>
+            </ul>
+          </div>
+
+          <!-- Exotic Materials -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid #c41e3a;">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">💎 Exotic Materials</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">Specialized alloys:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ Titanium & Inconel</li>
+              <li style="padding: 0.4rem 0;">✓ Monel & Duplex</li>
+              <li style="padding: 0.4rem 0;">✓ Stellite & Haste Alloy</li>
+              <li style="padding: 0.4rem 0;">✓ Bar Stocks & Forgings</li>
+            </ul>
+          </div>
+
+          <!-- SG Iron & Special Castings -->
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">🏗️ SG Iron & Castings</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin-bottom: 1rem;">High-quality castings:</p>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: var(--text-dark);">
+              <li style="padding: 0.4rem 0;">✓ SG Iron Casting</li>
+              <li style="padding: 0.4rem 0;">✓ Cast Iron</li>
+              <li style="padding: 0.4rem 0;">✓ Investment Castings</li>
+              <li style="padding: 0.4rem 0;">✓ Forgings Available</li>
+            </ul>
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-image">🔧</div>
-          <div class="card-content">
-            <h3>Fluid Control Valves</h3>
-            <p>Assembly and testing of complete valves with dispatch-ready quality. Ensuring optimal performance.</p>
-            <p><strong>Location:</strong> Sree Maruthi Industrial Estate, Coimbatore - 641049</p>
-            <a href="#" class="card-link">Learn More →</a>
-          </div>
+        <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.1) 0%, rgba(212, 160, 23, 0.1) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent); margin-top: 3rem; text-align: center;">
+          <p style="color: var(--primary); font-weight: 600; margin: 0; font-size: 1.05rem;">
+            ✓ Certified Suppliers | ✓ Quality Assured | ✓ Bulk & Custom Orders | ✓ Fast Delivery
+          </p>
         </div>
+      </div>
+
+      <!-- Bottom CTA -->
+      <div style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid #e0e0e0;">
+        <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.3rem;">Ready to start your project?</h3>
+        <a href="#contact" style="background: var(--accent); color: white; padding: 1rem 2.5rem; border-radius: 4px; font-weight: 600; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3); font-size: 1rem;">
+          Contact Our Experts
+        </a>
       </div>
     </div>
   </section>
@@ -418,234 +1131,244 @@
     <div class="container">
       <div class="section-title">
         <h2>Our Products</h2>
-        <p>Comprehensive catalog of 24 products across 5 categories</p>
       </div>
 
-      <div class="section-title">
-        <h3 style="border-bottom: 3px solid var(--secondary); padding-bottom: 1rem; margin-bottom: 2rem;">Fluid Control Valves (10 Products)</h3>
-      </div>
       <div class="products-grid">
         <div class="product-card">
-          <div class="product-image">🔴</div>
+          <div class="product-image">
+            <img src="./images/product-gauge.png" alt="Gauge Valves" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Gauge Valves</h4>
             <p>Precision gauge valves for accurate measurement and control</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🔵</div>
+          <div class="product-image">
+            <img src="./images/product-ball-valve.png" alt="Ball Valve" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Ball Valve</h4>
             <p>Durable ball valves for reliable flow control</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🟡</div>
+          <div class="product-image">
+            <img src="./images/product-steam-valve.png" alt="Butterfly Valve" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Butterfly Valve</h4>
             <p>High-performance butterfly valves for various applications</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🟢</div>
+          <div class="product-image">
+            <img src="./images/product-globe-valve.png" alt="Globe Valve" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Globe Valve</h4>
             <p>Precision globe valves for throttling applications</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🟣</div>
+          <div class="product-image">
+            <img src="./images/product-gate-valve.png" alt="Check Valve" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Check Valve</h4>
             <p>Non-return check valves for system protection</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">⭐</div>
+          <div class="product-image">
+            <img src="./images/product-pressure-valves.png" alt="Pressure Relief Valves" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Pressure Relief Valves</h4>
             <p>Standard pressure relief valves for system safety</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">💎</div>
+          <div class="product-image">
+            <img src="./images/product-relief-3000.png" alt="Relief Series 3000" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Relief Series 3000</h4>
             <p>Professional series pressure relief valves</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">👑</div>
+          <div class="product-image">
+            <img src="./images/product-relief-6000.png" alt="Relief Series 6000" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Relief Series 6000</h4>
             <p>Premium series pressure relief valves</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🔗</div>
+          <div class="product-image">
+            <img src="./images/product-pipeline-valve.png" alt="Pipe Line Valves" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Pipe Line Valves</h4>
             <p>Heavy-duty pipeline valves for industrial use</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🛡️</div>
+          <div class="product-image">
+            <img src="./images/product-resilient-gate.png" alt="Resilient Seated Gate" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Valves</span>
             <h4>Resilient Seated Gate</h4>
             <p>High-performance gate valves with resilient seats</p>
           </div>
         </div>
-      </div>
 
-      <div class="section-title">
-        <h3 style="border-bottom: 3px solid var(--secondary); padding-bottom: 1rem; margin-bottom: 2rem; margin-top: 3rem;">Valve Components (11 Products)</h3>
-      </div>
-      <div class="products-grid">
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-gate-valve-body.png" alt="Gate Valve Body" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Gate Valve Body</h4>
             <p>Precision-machined gate valve bodies</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-plug-valve.png" alt="Plug Valve Body" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Plug Valve Body</h4>
             <p>High-quality plug valve bodies</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-safety-valve-body.png" alt="Safety Valve Body" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Safety Valve Body</h4>
             <p>Engineered safety valve bodies</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-rising-stem.png" alt="Rising Stem OSY" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Rising Stem OSY</h4>
             <p>Professional valve stems with outside screw & yoke</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-rising-stem.png" alt="Rising Stem IS" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Rising Stem IS</h4>
             <p>Compact valve stem design with inside screw</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-non-rising-stem.png" alt="Non-Rising Stem IS" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Non-Rising Stem IS</h4>
             <p>Space-efficient stem components</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-sliding-stem.png" alt="Sliding Stem" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Sliding Stem</h4>
             <p>Precision sliding stem components</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-rotary-stem.png" alt="Rotary Stem" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Rotary Stem</h4>
             <p>Rotary stem for butterfly and ball valves</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-sheet-ring.png" alt="Seat Ring" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Seat Ring</h4>
             <p>High-precision seat rings for optimal sealing</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-flange-2.png" alt="Flange" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Flange</h4>
             <p>Standard and custom flanges for valve assembly</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">📦</div>
+          <div class="product-image">
+            <img src="./images/product-guide-bush-2.png" alt="Guide Bush" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Components</span>
             <h4>Guide Bush</h4>
             <p>Precision guide bushes for valve alignment</p>
           </div>
         </div>
-      </div>
 
-      <div class="section-title">
-        <h3 style="border-bottom: 3px solid var(--secondary); padding-bottom: 1rem; margin-bottom: 2rem; margin-top: 3rem;">Specialized Components</h3>
-      </div>
-      <div class="products-grid" style="grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));">
         <div class="product-card">
-          <div class="product-image">🧵</div>
+          <div class="product-image">
+            <img src="./images/product-textile-2.png" alt="Textile Components" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Textile</span>
             <h4>Textile Components</h4>
             <p>High-quality components for textile industry applications</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🚜</div>
+          <div class="product-image">
+            <img src="./images/product-power-tiller-2.png" alt="Power Tiller Components" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Power Tiller</span>
             <h4>Power Tiller Components</h4>
             <p>Precision-engineered components for power tillers</p>
           </div>
         </div>
 
         <div class="product-card">
-          <div class="product-image">🚗</div>
+          <div class="product-image">
+            <img src="./images/product-automotive-2.png" alt="Automobile Components" style="width:100%; height:100%; object-fit:contain;">
+          </div>
           <div class="product-content">
-            <span class="product-category">Automobile</span>
             <h4>Automobile Components</h4>
             <p>Specialized components for automotive applications</p>
           </div>
@@ -654,104 +1377,265 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section class="section">
+  <!-- Industries We Serve Section -->
+  <section class="section" id="industries" style="background: linear-gradient(to bottom, #f9f9f9 0%, #ffffff 100%); padding: 4rem 0; border-top: 1px solid #e0e0e0;">
     <div class="container">
-      <div class="section-title">
-        <h2>Why Choose Ellem Groups?</h2>
-        <p>Quality, reliability, and expertise across all our divisions</p>
+      <div style="text-align: center; margin-bottom: 3rem;">
+        <h2 style="font-size: 2.8rem; color: var(--primary); margin-bottom: 1rem;">
+          INDUSTRIES WE <span style="color: var(--accent);">SERVE</span>
+        </h2>
+        <p style="font-size: 1.2rem; color: var(--text-light); max-width: 800px; margin: 0 auto;">
+          Precision-engineered solutions trusted across diverse sectors. Our products and components ensure reliability and performance in demanding industrial applications worldwide.
+        </p>
       </div>
-      <div class="grid">
-        <div class="card" style="padding: 2rem;">
-          <h3 style="margin-top: 0;">✓ ISO Certified</h3>
-          <p>All products manufactured under strict ISO 9001 standards</p>
-        </div>
-        <div class="card" style="padding: 2rem;">
-          <h3 style="margin-top: 0;">✓ Precision Engineering</h3>
-          <p>CNC machines ensure perfect tolerances and quality</p>
-        </div>
-        <div class="card" style="padding: 2rem;">
-          <h3 style="margin-top: 0;">✓ Tested & Verified</h3>
-          <p>Every product undergoes rigorous testing before dispatch</p>
+
+      <!-- Industry Navigation Tabs -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 3rem;">
+        <button onclick="showIndustry('oil-gas')" class="industry-tab" style="background: var(--accent); color: white; padding: 0.8rem 1.8rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+          🛢️ Oil & Gas
+        </button>
+        <button onclick="showIndustry('chemical')" class="industry-tab" style="background: #f0f0f0; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+          🧪 Chemical
+        </button>
+        <button onclick="showIndustry('power')" class="industry-tab" style="background: #f0f0f0; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+          ⚡ Power
+        </button>
+        <button onclick="showIndustry('automotive')" class="industry-tab" style="background: #f0f0f0; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+          🚗 Automotive
+        </button>
+        <button onclick="showIndustry('water')" class="industry-tab" style="background: #f0f0f0; color: var(--primary); padding: 0.8rem 1.8rem; border-radius: 4px; border: none; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s;">
+          💧 Water Management
+        </button>
+      </div>
+
+      <!-- Oil & Gas Industry -->
+      <div id="oil-gas-content" class="industry-content">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">🛢️ Oil & Gas</span> Industry
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Reliable valve components and control systems engineered to withstand extreme pressures, temperatures, and corrosive environments in upstream, midstream, and downstream operations.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Ball Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">High-pressure ball valves for flow control in drilling, production, and pipeline applications. Available in multiple sizes and materials.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Gate Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Durable gate valves for main isolation applications. Designed for high-pressure systems and critical shut-off requirements.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--accent);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Relief Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Precision relief valves protecting systems from overpressure. Engineered for accuracy and reliability in harsh environments.</p>
+          </div>
         </div>
       </div>
+
+      <!-- Chemical Industry -->
+      <div id="chemical-content" class="industry-content" style="display: none;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">🧪 Chemical Processing</span> Industry
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Corrosion-resistant valve components and control systems specifically designed to handle aggressive chemical environments and maintain process integrity.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Butterfly Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Efficient butterfly valves for chemical flow control. Compact design with excellent sealing for process applications.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Check Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Anti-backflow check valves preventing reverse flow in chemical piping systems. Reliable performance under continuous operation.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--secondary);">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Gauge Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Precision gauge valves for accurate pressure and flow measurement in chemical processing units.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Power Generation Industry -->
+      <div id="power-content" class="industry-content" style="display: none;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">⚡ Power Generation</span> Industry
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Critical valve components and precision controls supporting thermal, hydro, and renewable power generation systems with uninterrupted reliability.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #ff6b6b;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Control Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Precise steam and water control valves for thermal power plants. Engineered for high-temperature, high-pressure operations.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #ff6b6b;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Isolation Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Reliable isolation valves for emergency shutdown and maintenance. Critical for power plant safety systems.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #ff6b6b;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Relief Systems</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Overpressure protection systems for boilers and steam lines. Precision-tuned for reliable operation.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Automotive Industry -->
+      <div id="automotive-content" class="industry-content" style="display: none;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">🚗 Automotive</span> Industry
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Precision-engineered components for automotive fluid systems including fuel, hydraulic, and coolant control with stringent OEM specifications.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #4ecdc4;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Fuel System Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">OEM-quality fuel shut-off and control valves meeting automotive safety and performance standards.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #4ecdc4;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Hydraulic Components</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">High-precision hydraulic valve components for brake and transmission systems with zero-defect quality.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #4ecdc4;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Coolant Control</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Engine coolant flow and temperature control valves. Reliable performance across temperature ranges.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Water Management Industry -->
+      <div id="water-content" class="industry-content" style="display: none;">
+        <h3 style="font-size: 1.8rem; color: var(--primary); margin-bottom: 0.5rem; text-align: center;">
+          <span style="color: var(--accent);">💧 Water Management</span> Industry
+        </h3>
+        <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+          Corrosion-resistant valve systems for water treatment, distribution, and wastewater management ensuring safe, efficient fluid control.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #95e1d3;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Isolation Valves</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Main line isolation valves for water distribution networks. Durable and corrosion-resistant for long service life.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #95e1d3;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Flow Control</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Precision flow control valves for treatment plants and distribution systems. Accurate measurement and regulation.</p>
+          </div>
+          <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #95e1d3;">
+            <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Wastewater Systems</h4>
+            <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Robust valves for sewage and wastewater treatment. Superior corrosion resistance and operational reliability.</p>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
+  <script>
+    function showIndustry(industry) {
+      // Hide all content
+      document.getElementById('oil-gas-content').style.display = 'none';
+      document.getElementById('chemical-content').style.display = 'none';
+      document.getElementById('power-content').style.display = 'none';
+      document.getElementById('automotive-content').style.display = 'none';
+      document.getElementById('water-content').style.display = 'none';
+      
+      // Show selected industry
+      document.getElementById(industry + '-content').style.display = 'block';
+      
+      // Update button styles
+      const buttons = document.querySelectorAll('.industry-tab');
+      buttons.forEach(btn => {
+        btn.style.background = '#f0f0f0';
+        btn.style.color = 'var(--primary)';
+      });
+      event.target.style.background = 'var(--accent)';
+      event.target.style.color = 'white';
+    }
+  </script>
+
   <!-- Contact Section -->
-  <section class="section section-light" id="contact">
+  <section class="section" id="contact">
     <div class="container">
       <div class="section-title">
         <h2>Contact Us</h2>
-        <p>Reach out to us for inquiries, quotes, or partnerships</p>
+        <p>Reach out for inquiries, quotes, or partnerships</p>
       </div>
 
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; max-width: 1000px; margin: 0 auto;">
+      <div style="max-width: 1000px; margin: 0 auto;">
         <div>
-          <h3 style="color: var(--primary);">Contact Information</h3>
+          <h3 style="color: var(--primary); text-align: center; margin-bottom: 3rem; font-size: 1.8rem;">📞 Contact Information</h3>
 
-          <div style="margin-bottom: 2rem;">
-            <h4>Ellem Engineering (Primary)</h4>
-            <p style="font-size: 0.9rem;">
-              📍 S.F.No.99/2A, 21/6<br/>
-              Sree Maruthi Industrial Estate<br/>
-              School Road, Chinnavedampatti (Post)<br/>
-              Coimbatore - 641 049<br/><br/>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+            <!-- Ellem Engineering -->
+            <div style="background: linear-gradient(135deg, rgba(31, 58, 95, 0.05) 0%, rgba(212, 160, 23, 0.05) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent);">
+              <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">⚙️ Ellem Engineering</h4>
+              <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 1.5rem;">
+                📍 <strong>Address:</strong><br/>
+                Sree Maruthi Industrial Estate<br/>
+                Chinnavedampatti<br/>
+                Coimbatore - 641 049<br/><br/>
 
-              📱 +91 98430 52005<br/>
-              📱 +91 98431 52005<br/><br/>
+                📱 <strong>Phone:</strong><br/>
+                +91 98430 52005<br/>
+                +91 98431 52005<br/><br/>
 
-              📧 fcv@ellemengineering.com<br/>
-              📧 sales@ellemengineering.com<br/>
-              📧 production@ellemengineering.com
-            </p>
-          </div>
-
-          <div style="margin-bottom: 2rem;">
-            <h4>Ellem Foundry</h4>
-            <p style="font-size: 0.9rem;">
-              📍 S.F.No.505, Site no. 55D<br/>
-              Cosmafun Foundry<br/>
-              Cluster Park-1, Arasur West<br/>
-              Coimbatore - 641407
-            </p>
-          </div>
-
-          <div>
-            <h4>Fluid Control Valves</h4>
-            <p style="font-size: 0.9rem;">
-              📍 S.F.No.99/2, 21/6<br/>
-              Sree Maruthi Industrial Estate<br/>
-              School Road, Chinnavedampatti (PO)<br/>
-              Coimbatore - 641049
-            </p>
-          </div>
-        </div>
-
-        <div>
-          <h3 style="color: var(--primary);">Quick Contact</h3>
-          <form style="background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);">
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary);">Name</label>
-              <input type="text" placeholder="Your name" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 4px; font-family: inherit;">
+                📧 <strong>Email:</strong><br/>
+                <a href="mailto:fcv@ellemengineering.com" style="color: var(--accent); font-weight: 600;">fcv@ellemengineering.com</a><br/>
+                <a href="mailto:sales@ellemengineering.com" style="color: var(--accent); font-weight: 600;">sales@ellemengineering.com</a><br/>
+                <a href="mailto:production@ellemengineering.com" style="color: var(--accent); font-weight: 600;">production@ellemengineering.com</a>
+              </p>
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary);">Email</label>
-              <input type="email" placeholder="your@email.com" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 4px; font-family: inherit;">
+            <!-- Ellem Foundry -->
+            <div style="background: linear-gradient(135deg, rgba(255, 107, 53, 0.05) 0%, rgba(212, 160, 23, 0.05) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #ff6b35;">
+              <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">🏭 Ellem Foundry</h4>
+              <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 1.5rem;">
+                📍 <strong>Address:</strong><br/>
+                S.F.No.505, Site no. 55D<br/>
+                Cosmafun Foundry<br/>
+                Cluster Park-1, Arasur West<br/>
+                Coimbatore - 641407<br/><br/>
+
+                📱 <strong>Phone:</strong><br/>
+                +91 98430 52005<br/><br/>
+
+                📧 <strong>Email:</strong><br/>
+                <a href="mailto:sales@ellemengineering.com" style="color: var(--accent); font-weight: 600;">sales@ellemengineering.com</a>
+              </p>
             </div>
 
-            <div style="margin-bottom: 1.5rem;">
-              <label style="display: block; margin-bottom: 0.5rem; font-weight: 600; color: var(--primary);">Message</label>
-              <textarea placeholder="Your message" style="width: 100%; padding: 0.75rem; border: 1px solid var(--border); border-radius: 4px; font-family: inherit; min-height: 120px; resize: vertical;"></textarea>
-            </div>
+            <!-- Fluid Control Valves And Components -->
+            <div style="background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(212, 160, 23, 0.05) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid #0066cc;">
+              <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">🔧 Fluid Control Valves & Components</h4>
+              <p style="font-size: 0.95rem; line-height: 1.8; color: var(--text-dark); margin-bottom: 1.5rem;">
+                📍 <strong>Address:</strong><br/>
+                Anjugam Nagar, Udayampalayam<br/>
+                Chinnavedampatti<br/>
+                Coimbatore - 641049<br/><br/>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
-          </form>
+                📱 <strong>Phone:</strong><br/>
+                +91 80950 45661<br/>
+                +91 98430 52005<br/><br/>
+
+                📧 <strong>Email:</strong><br/>
+                <a href="mailto:sales@ellemengineering.com" style="color: var(--accent); font-weight: 600;">sales@ellemengineering.com</a>
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+
+      <!-- Brochure Download CTA for Contact Section -->
+      <div style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%); padding: 3rem; border-radius: 12px; text-align: center; margin-top: 3rem; border-left: 4px solid var(--accent);">
+        <h3 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.6rem; font-weight: 700;">Want to Learn More?</h3>
+        <p style="color: var(--text-light); font-size: 1.05rem; margin-bottom: 2rem;">
+          Our detailed brochure contains complete information about our capabilities, certifications, and product portfolio.
+        </p>
+        <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%); color: white; padding: 0.9rem 2.2rem; border-radius: 5px; font-weight: 700; display: inline-block; transition: all 0.3s; box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3); font-size: 1rem; letter-spacing: 0.3px;">
+          📥 DOWNLOAD BROCHURE
+        </a>
+      </div>
 
   <!-- Footer -->
   <footer class="footer">

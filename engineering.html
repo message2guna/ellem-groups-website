@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellem Engineering - CNC Precision Manufacturing</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1f3a5f;
+      --secondary: #d4a017;
+      --accent: #f8b500;
+      --text-dark: #1a1a1a;
+      --text-light: #666666;
+      --bg-light: #f9f9f9;
+      --bg-white: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar {
+      background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+      color: var(--text-dark);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+      padding: 0.5rem 2rem;
+    }
+
+    .navbar-menu {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .navbar-menu a {
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      font-size: 0.95rem;
+    }
+
+    .navbar-menu a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid transparent;
+      font-size: 0.95rem;
+      height: 100%;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      min-width: 250px;
+      padding: 0.5rem 0;
+      list-style: none;
+      margin-top: 0.5rem;
+      display: none;
+      z-index: 1001;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--primary);
+      font-weight: 500;
+      border-bottom: none;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%);
+      color: var(--accent);
+      border-bottom: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%);
+      color: var(--bg-white);
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .content-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #e6f7f5 0%, #ccf0ed 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .content-text h3 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .content-text p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .highlight-card h4 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .highlight-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .spec-item {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .spec-item:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+
+    .spec-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .spec-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .spec-item p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .footer-section p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 5px;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212, 160, 23, 0.4);
+    }
+
+    .machinery-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" style="display: flex; align-items: center; gap: 0; flex-shrink: 0; margin: 0; padding: 0;">
+        <img src="./images/logo.png" alt="Ellem Groups Logo" style="height: 50px; width: auto; display: block;">
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#companies">About</a></li>
+        <li class="dropdown">
+          <span class="dropdown-toggle">Facilities▼</span>
+          <ul class="dropdown-menu">
+            <li><a href="foundry.html">🏭 Ellem Foundry</a></li>
+            <li><a href="engineering.html">⚙️ Ellem Engineering</a></li>
+            <li><a href="fluid-control.html">🔧 Fluid Control Valves</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#capabilities">Capabilities</a></li>
+        <li><a href="index.html#industries">Industries</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li>
+          <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%); color: white; padding: 0.55rem 1.1rem; border-radius: 5px; font-weight: 700; transition: all 0.3s; display: inline-block; font-size: 0.85rem; white-space: nowrap; box-shadow: 0 3px 8px rgba(212, 160, 23, 0.3); letter-spacing: 0.3px;">
+            📥 BROCHURE
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>⚙️ Ellem Engineering</h1>
+      <p>State-of-the-Art CNC Precision Manufacturing & Advanced Machining</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Overview Section -->
+    <section class="section">
+      <div class="section-title">
+        <h2>Advanced CNC <span style="color: var(--accent);">Precision Manufacturing</span></h2>
+      </div>
+
+      <div class="content-grid">
+        <div class="content-image" style="background: url('./images/m1-653be89a-92ef-4419-ac4f-e1526e61de95.png') center/cover; font-size: 0;"></div>
+        <div class="content-text">
+          <h3>Micron-Level Accuracy Engineering</h3>
+          <p>
+            Ellem Engineering represents the pinnacle of CNC machining excellence, delivering precision components with micron-level accuracy to the world's most demanding industries. Our state-of-the-art facility combines cutting-edge machinery with expert engineering to transform raw materials into mission-critical components.
+          </p>
+          <p>
+            With advanced CNC turning, vertical machining centers (VMC), and vertical turning lathes (VTL), we handle complex geometries and tight tolerances that competitors cannot match. Every component is engineered for performance, reliability, and cost-effectiveness.
+          </p>
+        </div>
+      </div>
+
+      <!-- Highlights -->
+      <div class="highlights">
+        <div class="highlight-card">
+          <h4>🎯 CNC Turning Excellence</h4>
+          <p>Advanced multi-axis CNC turning for cylindrical components with tolerances to ±0.05mm</p>
+        </div>
+        <div class="highlight-card">
+          <h4>📐 VMC Solutions</h4>
+          <p>Complex 3-axis and 5-axis machining for intricate geometries and compound surfaces</p>
+        </div>
+        <div class="highlight-card">
+          <h4>🔄 VTL Capabilities</h4>
+          <p>Large component turning and facing operations for substantial assemblies and systems</p>
+        </div>
+        <div class="highlight-card">
+          <h4>✅ Zero-Defect Quality</h4>
+          <p>100% inline inspection with CMM verification ensuring flawless component delivery</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Machinery Section -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.04) 0%, rgba(212, 160, 23, 0.04) 100%); margin-left: -2rem; margin-right: -2rem; padding: 4rem 2rem;">
+      <div class="section-title">
+        <h2>State-of-the-Art <span style="color: var(--accent);">Machinery</span></h2>
+        <p>Advanced equipment enabling impossible precision and complex geometries</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="icon">🔧</div>
+          <h4>CNC Turning Centers</h4>
+          <p>6 multi-axis CNC turning machines with live tooling and SubSpindle capability</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">🎯</div>
+          <h4>Vertical Machining</h4>
+          <p>4 VMC machines with 3-axis and 5-axis configurations for complex parts</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">⚙️</div>
+          <h4>Vertical Turning Lathes</h4>
+          <p>2 VTL systems for large diameter, high-precision machining and facing operations</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">📊</div>
+          <h4>CMM Inspection</h4>
+          <p>Coordinate measuring machine with automated programming for 100% verification</p>
+        </div>
+      </div>
+
+      <!-- Machinery Gallery -->
+      <div style="margin-top: 4rem;">
+        <h3 style="text-align: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 2.5rem; font-weight: 700;">Our Manufacturing Facilities</h3>
+        <div class="machinery-gallery">
+          <div class="gallery-item">
+            <img src="./images/m1-653be89a-92ef-4419-ac4f-e1526e61de95.png" alt="Manufacturing Facility Overview">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/m2-768aee4b-1302-49a4-aafd-b2129e128b78.png" alt="Red CNC Machining Center">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/m3-a237cf4b-f334-434b-8809-0af8d03c70d1.png" alt="Industrial Facility Building">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/m4-f7abea3a-de15-4416-b24a-1b1694130894.png" alt="CNC Equipment Room">
+          </div>
+        </div>
+      </div>
+    <section class="section">
+      <div class="section-title">
+        <h2>Material Expertise & <span style="color: var(--accent);">Engineering Solutions</span></h2>
+      </div>
+
+      <div class="content-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="content-text">
+          <h3>Diverse Material Capabilities</h3>
+          <p>We machine a comprehensive range of materials including stainless steels, aluminum alloys, titanium, exotic superalloys, and specialized composites. Our extensive material knowledge ensures optimal machining strategies and surface finish quality.</p>
+          <p>Every material specification is validated against your application requirements, with material certifications and traceability documentation provided for critical components.</p>
+        </div>
+        <div class="content-text">
+          <h3>Engineering-Driven Approach</h3>
+          <p>Our engineering team provides DFM (Design for Manufacturability) consultation, tool path optimization, and process refinement. We collaborate with your design teams to achieve ideal cost-to-quality balance.</p>
+          <p>Dedicated CAM programmers ensure first-piece quality while reducing cycle times and tool wear through intelligent programming strategies.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.04) 0%, rgba(212, 160, 23, 0.04) 100%); margin-left: -2rem; margin-right: -2rem; padding: 4rem 2rem;">
+      <div class="section-title">
+        <h2>Industries We <span style="color: var(--accent);">Serve</span></h2>
+      </div>
+
+      <div class="highlights">
+        <div class="highlight-card">
+          <h4>🏭 Automotive & Powertrains</h4>
+          <p>Crankshafts, camshafts, and transmission components for vehicle manufacturers</p>
+        </div>
+        <div class="highlight-card">
+          <h4>⚙️ Industrial Machinery</h4>
+          <p>Pump shafts, motor components, and specialized machinery parts</p>
+        </div>
+        <div class="highlight-card">
+          <h4>✈️ Aerospace & Defense</h4>
+          <p>Critical flight components and specialized defense equipment with full traceability</p>
+        </div>
+        <div class="highlight-card">
+          <h4>🌊 Oil & Gas</h4>
+          <p>Downhole tools, valve spools, and pressure-critical components</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+      <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); padding: 3.5rem; border-radius: 12px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(31, 58, 95, 0.2);">
+        <div style="position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: rgba(248, 181, 0, 0.05); border-radius: 50%;"></div>
+        <div style="position: relative; z-index: 1;">
+          <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem; font-weight: 700;">Ready to Partner with Ellem Engineering?</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Send us your specifications and let our precision engineering experts deliver components that exceed your expectations.
+          </p>
+          <a href="index.html#contact" class="cta-button" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
+            Get in Touch →
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h4>Ellem Engineering</h4>
+        <p>Advanced CNC precision manufacturing and micron-level engineering solutions.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Location</h4>
+        <p>Sree Maruthi Industrial Estate, Coimbatore - 641 049</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <p><a href="index.html" style="color: var(--accent); hover:text-decoration: underline;">Back to Home</a></p>
+        <p><a href="index.html#contact" style="color: var(--accent); hover:text-decoration: underline;">Contact Us</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellem Foundry - Precision Casting Excellence</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #1f3a5f;
+      --secondary: #d4a017;
+      --accent: #f8b500;
+      --text-dark: #1a1a1a;
+      --text-light: #666666;
+      --bg-light: #f9f9f9;
+      --bg-white: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--text-dark);
+      background-color: var(--bg-white);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; border: none; font-family: inherit; }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .navbar {
+      background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 100%);
+      color: var(--text-dark);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .navbar-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: 2rem;
+      padding: 0.5rem 2rem;
+    }
+
+    .navbar-menu {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .navbar-menu a {
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.5rem 0;
+      border-bottom: 2px solid transparent;
+      font-size: 0.95rem;
+    }
+
+    .navbar-menu a:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0rem;
+      color: var(--primary);
+      font-weight: 600;
+      transition: all 0.3s ease;
+      padding: 0.75rem 0;
+      border-bottom: 2px solid transparent;
+      font-size: 0.95rem;
+      height: 100%;
+      white-space: nowrap;
+      flex-wrap: nowrap;
+    }
+
+    .dropdown-toggle:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+      min-width: 250px;
+      padding: 0.5rem 0;
+      list-style: none;
+      margin-top: 0.5rem;
+      display: none;
+      z-index: 1001;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .dropdown-menu li {
+      margin: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1.5rem;
+      color: var(--primary);
+      font-weight: 500;
+      border-bottom: none;
+      transition: all 0.2s ease;
+    }
+
+    .dropdown-menu a:hover {
+      background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%);
+      color: var(--accent);
+      border-bottom: none;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%);
+      color: var(--bg-white);
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .section-title p {
+      font-size: 1.1rem;
+      color: var(--text-light);
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .content-image {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #fff9e6 0%, #ffe6cc 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    }
+
+    .content-text h3 {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+    }
+
+    .content-text p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    .highlights {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+    }
+
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(248, 181, 0, 0.08) 0%, rgba(212, 160, 23, 0.08) 100%);
+      padding: 2rem;
+      border-radius: 12px;
+      border-left: 4px solid var(--accent);
+    }
+
+    .highlight-card h4 {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .highlight-card p {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .spec-item {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .spec-item:hover {
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      transform: translateY(-3px);
+    }
+
+    .spec-item .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .spec-item h4 {
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .spec-item p {
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    .machinery-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .footer {
+      background: var(--primary);
+      color: white;
+      padding: 3rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 1rem;
+      color: var(--accent);
+    }
+
+    .footer-section p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .cta-button {
+      background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%);
+      color: white;
+      padding: 1rem 2.5rem;
+      border-radius: 5px;
+      font-weight: 700;
+      display: inline-block;
+      transition: all 0.3s;
+      box-shadow: 0 4px 12px rgba(212, 160, 23, 0.3);
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(212, 160, 23, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero h1 { font-size: 2rem; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <a href="index.html" style="display: flex; align-items: center; gap: 0; flex-shrink: 0; margin: 0; padding: 0;">
+        <img src="./images/logo.png" alt="Ellem Groups Logo" style="height: 50px; width: auto; display: block;">
+      </a>
+      <ul class="navbar-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#companies">About</a></li>
+        <li class="dropdown">
+          <span class="dropdown-toggle">Facilities▼</span>
+          <ul class="dropdown-menu">
+            <li><a href="foundry.html">🏭 Ellem Foundry</a></li>
+            <li><a href="engineering.html">⚙️ Ellem Engineering</a></li>
+            <li><a href="fluid-control.html">🔧 Fluid Control Valves</a></li>
+          </ul>
+        </li>
+        <li><a href="index.html#capabilities">Capabilities</a></li>
+        <li><a href="index.html#industries">Industries</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+        <li>
+          <a href="./FLUID-CONTROL-VALVES-AND-COMPONENTS-Corporate-Brochure.pdf" download style="background: linear-gradient(135deg, var(--accent) 0%, #d4a017 100%); color: white; padding: 0.55rem 1.1rem; border-radius: 5px; font-weight: 700; transition: all 0.3s; display: inline-block; font-size: 0.85rem; white-space: nowrap; box-shadow: 0 3px 8px rgba(212, 160, 23, 0.3); letter-spacing: 0.3px;">
+            📥 BROCHURE
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>🏭 Ellem Foundry</h1>
+      <p>Precision Casting Excellence & Advanced Metal Solutions</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <div class="container">
+    <!-- Overview Section -->
+    <section class="section">
+      <div class="section-title">
+        <h2>Advanced Precision <span style="color: var(--accent);">Casting Operations</span></h2>
+      </div>
+
+      <div class="content-grid">
+        <div class="content-image" style="background: url('./images/i1-c5d9367e-8ae6-47cb-961e-0585d2ae3099.png') center/cover; font-size: 0;"></div>
+        <div class="content-text">
+          <h3>Our Expertise in Metal Casting</h3>
+          <p>
+            Ellem Foundry stands as a beacon of precision and excellence in metal casting, serving demanding industrial sectors for over two decades. Our state-of-the-art facilities combine traditional craftsmanship with cutting-edge technology to produce components that consistently exceed international quality standards.
+          </p>
+          <p>
+            We specialize in die casting and investment casting processes, delivering components with exceptional dimensional accuracy, superior surface finish, and unmatched reliability. Every product undergoes rigorous testing to ensure performance in the most demanding applications.
+          </p>
+        </div>
+      </div>
+
+      <!-- Highlights -->
+      <div class="highlights">
+        <div class="highlight-card">
+          <h4>🎯 Die Casting Excellence</h4>
+          <p>High-pressure die casting for automotive, hydraulic, and industrial applications with tolerances up to ±0.1mm</p>
+        </div>
+        <div class="highlight-card">
+          <h4>💎 Investment Casting</h4>
+          <p>Complex precision components for aerospace, marine, and specialized industrial equipment manufacturers</p>
+        </div>
+        <div class="highlight-card">
+          <h4>✅ Quality Assurance</h4>
+          <p>100% dimensional inspection, material testing, and pressure validation for every production batch</p>
+        </div>
+        <div class="highlight-card">
+          <h4>🌍 Global Standards</h4>
+          <p>ISO 9001, NADCAP, and API certifications ensuring products meet the most stringent international specifications</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.04) 0%, rgba(212, 160, 23, 0.04) 100%); margin-left: -2rem; margin-right: -2rem; padding: 4rem 2rem;">
+      <div class="section-title">
+        <h2>Manufacturing <span style="color: var(--accent);">Capabilities</span></h2>
+        <p>Comprehensive services from raw material to finished component delivery</p>
+      </div>
+
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="icon">⚙️</div>
+          <h4>Die Casting Machines</h4>
+          <p>12 high-pressure die casting machines ranging from 250 to 1200 tons</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">🔬</div>
+          <h4>Advanced Equipment</h4>
+          <p>CNC machining centers, polishing units, and automated handling systems</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">📊</div>
+          <h4>Testing Laboratory</h4>
+          <p>Spectrometer, tensile testing machine, hardness tester, and leak detection systems</p>
+        </div>
+        <div class="spec-item">
+          <div class="icon">👥</div>
+          <h4>Expert Team</h4>
+          <p>35+ skilled technicians with 15+ years average experience in precision casting</p>
+        </div>
+      </div>
+
+      <!-- Foundry Gallery -->
+      <div style="margin-top: 4rem;">
+        <h3 style="text-align: center; color: var(--primary); font-size: 1.8rem; margin-bottom: 2.5rem; font-weight: 700;">Our Foundry Facilities</h3>
+        <div class="machinery-gallery">
+          <div class="gallery-item">
+            <img src="./images/i1-c5d9367e-8ae6-47cb-961e-0585d2ae3099.png" alt="Foundry Facility Building">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/i2-9384d09f-0c3f-4c34-864b-f6623e02e377.png" alt="Die Casting Operation">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/i3-0651b63d-796c-475a-9efb-520e4edd715b.png" alt="Casting Equipment">
+          </div>
+          <div class="gallery-item">
+            <img src="./images/i4-17ae83ee-2149-4ad5-8e0a-0f975e97f2e2.png" alt="Industrial Foundry Setup">
+          </div>
+        </div>
+      </div>
+    <section class="section">
+      <div class="section-title">
+        <h2>Materials & <span style="color: var(--accent);">Process Control</span></h2>
+      </div>
+
+      <div class="content-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="content-text">
+          <h3>Premium Material Selection</h3>
+          <p>We work with the finest aluminum alloys, zinc alloys, and specialty materials sourced from certified suppliers. Every batch undergoes material certification and spectrometric analysis before production begins.</p>
+          <p>Our material handling processes ensure zero contamination and optimal properties for your specific application requirements.</p>
+        </div>
+        <div class="content-text">
+          <h3>Advanced Process Control</h3>
+          <p>Our ISO-certified process controls include real-time temperature monitoring, pressure profiling, and automated data logging for complete traceability.</p>
+          <p>We maintain statistical process control (SPC) on all critical parameters, ensuring consistent product quality and enabling continuous improvement initiatives.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Industries Section -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(248, 181, 0, 0.04) 0%, rgba(212, 160, 23, 0.04) 100%); margin-left: -2rem; margin-right: -2rem; padding: 4rem 2rem;">
+      <div class="section-title">
+        <h2>Industries We <span style="color: var(--accent);">Serve</span></h2>
+      </div>
+
+      <div class="highlights">
+        <div class="highlight-card">
+          <h4>🏭 Automotive</h4>
+          <p>Engine blocks, transmission components, and suspension parts for OEMs and suppliers</p>
+        </div>
+        <div class="highlight-card">
+          <h4>⚙️ Industrial Equipment</h4>
+          <p>Hydraulic components, pump housings, and machinery parts for global manufacturers</p>
+        </div>
+        <div class="highlight-card">
+          <h4>✈️ Aerospace</h4>
+          <p>High-precision investment castings for aircraft systems and aviation applications</p>
+        </div>
+        <div class="highlight-card">
+          <h4>🌊 Marine</h4>
+          <p>Corrosion-resistant alloys for marine propulsion and structural components</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section">
+      <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); padding: 3.5rem; border-radius: 12px; text-align: center; position: relative; overflow: hidden; box-shadow: 0 12px 40px rgba(31, 58, 95, 0.2);">
+        <div style="position: absolute; top: -50%; right: -10%; width: 300px; height: 300px; background: rgba(248, 181, 0, 0.05); border-radius: 50%;"></div>
+        <div style="position: relative; z-index: 1;">
+          <h3 style="color: white; font-size: 2rem; margin-bottom: 1rem; font-weight: 700;">Ready to Partner with Ellem Foundry?</h3>
+          <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+            Contact our team to discuss your casting requirements and discover how we can deliver superior quality components for your applications.
+          </p>
+          <a href="index.html#contact" class="cta-button" style="font-size: 1.05rem; padding: 1rem 2.5rem;">
+            Get in Touch →
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-section">
+        <h4>Ellem Foundry</h4>
+        <p>Advanced precision casting and metal component manufacturing for global industries.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Location</h4>
+        <p>Cosmafun Foundry, Cluster Park-1, Arasur West, Coimbatore - 641407</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <p><a href="index.html" style="color: var(--accent); hover:text-decoration: underline;">Back to Home</a></p>
+        <p><a href="index.html#contact" style="color: var(--accent); hover:text-decoration: underline;">Contact Us</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
