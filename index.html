@@ -11,6 +11,12 @@
       box-sizing: border-box;
     }
 
+    html, body {
+      overflow-x: hidden !important;
+      width: 100%;
+      max-width: 100%;
+    }
+
     :root {
       --primary: #1f3a5f;
       --secondary: #d4a017;
@@ -158,7 +164,7 @@
 
       .mobile-menu-toggle {
         display: block !important;
-        margin-left: auto;
+        margin-left: auto !important;
         padding: 0.5rem 0.6rem;
         font-size: 1.8rem;
         flex-shrink: 0;
@@ -176,6 +182,12 @@
 
       .dropdown:hover .dropdown-menu {
         display: none;
+      }
+
+      body.menu-open {
+        overflow: hidden !important;
+        position: fixed !important;
+        width: 100% !important;
       }
     }
 
@@ -894,25 +906,17 @@
     function toggleMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       const body = document.body;
-      menu.classList.toggle('active');
       
-      // Prevent body scroll when menu is open
-      if (menu.classList.contains('active')) {
-        body.style.overflow = 'hidden';
-        body.style.position = 'fixed';
-        body.style.width = '100%';
-      } else {
-        body.style.overflow = 'auto';
-        body.style.position = 'relative';
-      }
+      menu.classList.toggle('active');
+      body.classList.toggle('menu-open');
     }
 
     function closeMobileMenu() {
       const menu = document.getElementById('mobileMenu');
       const body = document.body;
+      
       menu.classList.remove('active');
-      body.style.overflow = 'auto';
-      body.style.position = 'relative';
+      body.classList.remove('menu-open');
     }
   </script>
 
