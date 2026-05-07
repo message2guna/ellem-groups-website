@@ -507,6 +507,12 @@
       .navbar-logo {
         font-size: 1.2rem;
         flex-shrink: 0;
+        max-width: 80px;
+      }
+
+      .navbar-logo img {
+        height: 50px !important;
+        width: auto !important;
       }
 
       .mobile-menu-toggle {
@@ -556,12 +562,14 @@
 
       #home {
         height: auto;
-        padding: 2rem 0;
+        padding: 0;
+        background: white;
       }
 
       .carousel-wrapper {
         position: static !important;
         height: auto !important;
+        background: white !important;
       }
 
       .carousel-slide {
@@ -571,28 +579,40 @@
         width: 100% !important;
         height: auto !important;
         opacity: 1 !important;
-        background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f5 100%) !important;
-        padding: 1.5rem 0 !important;
+        background: white !important;
+        padding: 2rem 0 !important;
+        margin: 0 !important;
       }
 
       .carousel-slide.active-slide {
         display: grid !important;
       }
 
+      .carousel-slide:first-child {
+        display: grid !important;
+      }
+
       .carousel-slide > div {
         padding: 1.5rem !important;
         height: auto !important;
+        background: white !important;
+        order: 0 !important;
+      }
+
+      .carousel-slide > div:last-child {
+        display: none !important;
       }
 
       .carousel-slide h2 {
-        font-size: 1.4rem !important;
-        line-height: 1.3;
+        font-size: 1.6rem !important;
+        line-height: 1.2;
         margin-bottom: 1rem !important;
       }
 
       .carousel-slide p {
         font-size: 0.95rem !important;
         margin-bottom: 1.5rem !important;
+        color: #666 !important;
       }
 
       .carousel-slide ul {
@@ -605,12 +625,18 @@
 
       .carousel-slide a {
         padding: 0.7rem 1.2rem !important;
-        font-size: 0.9rem !important;
+        font-size: 0.85rem !important;
         display: block !important;
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.8rem !important;
+        max-width: 100%;
       }
 
-      .carousel-slide > div:last-child {
+      [style*="position: absolute; bottom: 30px"] {
+        display: none !important;
+      }
+
+      /* Hide carousel dots on mobile */
+      .carousel-dot {
         display: none !important;
       }
 
