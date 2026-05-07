@@ -243,6 +243,7 @@
         text-align: left !important;
         margin: 0 !important;
         user-select: none !important;
+        text-decoration: none !important;
       }
 
       .dropdown-toggle:hover {
@@ -1050,11 +1051,11 @@
         <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
         <li><a href="#companies" onclick="closeMobileMenu()">About</a></li>
         <li class="dropdown" style="border-bottom: none !important;">
-          <span class="dropdown-toggle">Facilities ▼</span>
+          <a href="#" class="dropdown-toggle" onclick="event.preventDefault(); this.closest('.dropdown').classList.toggle('active');">Facilities ▼</a>
           <ul class="dropdown-menu">
-            <li><a href="foundry.html">🏭 Ellem Foundry</a></li>
-            <li><a href="engineering.html">⚙️ Ellem Engineering</a></li>
-            <li><a href="fluid-control.html">🔧 Fluid Control Valves And Components</a></li>
+            <li><a href="foundry.html" onclick="this.closest('.dropdown').classList.remove('active');">🏭 Ellem Foundry</a></li>
+            <li><a href="engineering.html" onclick="this.closest('.dropdown').classList.remove('active');">⚙️ Ellem Engineering</a></li>
+            <li><a href="fluid-control.html" onclick="this.closest('.dropdown').classList.remove('active');">🔧 Fluid Control Valves And Components</a></li>
           </ul>
         </li>
         <li><a href="#capabilities" onclick="closeMobileMenu()">Capabilities</a></li>
