@@ -176,6 +176,7 @@
       .navbar-menu {
         display: none !important;
         flex-direction: column !important;
+        align-items: stretch !important;
         position: fixed !important;
         top: 60px !important;
         left: 0 !important;
@@ -203,6 +204,7 @@
         margin: 0 !important;
         list-style: none !important;
         padding: 0 !important;
+        height: auto !important;
       }
 
       .navbar-menu a {
@@ -216,6 +218,7 @@
         box-sizing: border-box !important;
         text-decoration: none !important;
         margin: 0 !important;
+        height: auto !important;
       }
 
       .navbar-menu a:hover {
@@ -231,23 +234,20 @@
 
       .dropdown-toggle {
         display: block !important;
-        padding: 1rem 1.5rem 0.5rem 1.5rem !important;
+        padding: 1rem 1.5rem !important;
         color: var(--accent) !important;
         font-weight: 600 !important;
         font-size: 1rem !important;
-        cursor: pointer !important;
         width: 100% !important;
-        box-sizing: border-box !important;
         background: white !important;
         border: none !important;
         text-align: left !important;
         margin: 0 !important;
-        user-select: none !important;
-        text-decoration: none !important;
+        height: auto !important;
       }
 
-      .dropdown-toggle:hover {
-        background: #f5f5f5 !important;
+      .dropdown:hover .dropdown-menu {
+        display: none !important;
       }
 
       .dropdown-menu {
@@ -260,11 +260,6 @@
         border: none !important;
         margin: 0 !important;
         width: 100% !important;
-        gap: 0 !important;
-      }
-
-      .dropdown-menu.active {
-        display: block !important;
       }
 
       .dropdown.active .dropdown-menu {
@@ -275,7 +270,6 @@
         border: none !important;
         padding: 0 !important;
         margin: 0 !important;
-        list-style: none !important;
       }
 
       .dropdown-menu a {
@@ -284,34 +278,8 @@
         border-bottom: 1px solid #e0e0e0 !important;
         display: block !important;
         width: 100% !important;
-        box-sizing: border-box !important;
         font-size: 0.95rem !important;
         color: var(--primary) !important;
-        font-weight: 500 !important;
-        margin: 0 !important;
-      }
-
-      .dropdown-menu a:hover {
-        background: #efefef !important;
-        color: var(--accent) !important;
-      }
-
-      .dropdown.active .dropdown-menu {
-        display: block !important;
-      }
-
-      .dropdown-menu {
-        position: static;
-        display: none;
-        box-shadow: none;
-        background: #f9f9f9;
-        min-width: auto;
-        padding: 0;
-        border: none;
-      }
-
-      .dropdown:hover .dropdown-menu {
-        display: none;
       }
 
       body.menu-open {
@@ -380,8 +348,18 @@
       z-index: 1001;
     }
 
-    .dropdown:hover .dropdown-menu {
+    .dropdown:hover .dropdown-menu,
+    .dropdown.active .dropdown-menu {
       display: block;
+    }
+
+    .dropdown::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      height: 0.75rem;
     }
 
     .dropdown-menu li {
@@ -658,6 +636,22 @@
       transform: translateY(-2px);
     }
 
+    /* Desktop: carousel track is transparent so the grid layout is preserved */
+    @media (min-width: 769px) {
+      .carousel-track {
+        display: contents;
+      }
+      .carousel-track > [aria-hidden="true"] {
+        display: none !important;
+      }
+      .carousel-nav {
+        display: none !important;
+      }
+      .carousel-side-arrow {
+        display: none !important;
+      }
+    }
+
     /* MOBILE: 768px and below - ONLY MOBILE VIEW */
     @media (max-width: 768px) {
       * {
@@ -734,147 +728,110 @@
         content: "E" !important;
       }
 
-      .mobile-menu-toggle {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0.3rem 0.6rem !important;
-        font-size: 2rem !important;
-        flex-shrink: 0 !important;
-        color: var(--primary) !important;
-        background: none !important;
-        border: none !important;
-        cursor: pointer !important;
-        min-width: 50px !important;
-        text-align: center !important;
+      /* Hero banner: single-slide auto-carousel on mobile */
+      #home {
+        height: 560px !important;
+        overflow: hidden !important;
+        position: relative !important;
       }
 
-      .navbar-menu {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        right: 0;
-        background: white;
-        flex-direction: column;
-        max-height: calc(100vh - 60px);
-        overflow-y: auto;
-        z-index: 999;
-        display: none !important;
-        gap: 0;
-        padding: 0;
-      }
-
-      .navbar-menu.active {
-        display: flex !important;
-      }
-
-      .navbar-menu li {
-        width: 100%;
-        border-bottom: 1px solid #f0f0f0;
-      }
-
-      .navbar-menu a {
-        display: block;
-        padding: 1rem 1.5rem;
-        border: none !important;
-        color: var(--primary);
-        font-weight: 500;
-        font-size: 1rem;
-      }
-
-      .navbar-menu a:hover {
-        background: #f9f9f9;
-        color: var(--accent);
+      .carousel-wrapper {
+        position: relative !important;
+        height: 100% !important;
       }
 
       .carousel-slide {
-        display: none !important;
-        position: static !important;
-        grid-template-columns: 1fr !important;
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
         width: 100% !important;
-        height: auto !important;
-        opacity: 1 !important;
-        background: linear-gradient(to bottom, #f8f9fa 0%, #f0f2f5 100%) !important;
+        height: 100% !important;
+        opacity: 0 !important;
+        transition: opacity 0.6s ease !important;
+        pointer-events: none !important;
         padding: 0 !important;
         margin: 0 !important;
-        flex-direction: column !important;
       }
 
       .carousel-slide.active-slide {
-        display: flex !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
       }
 
-      .carousel-slide:first-child {
-        display: flex !important;
-      }
-
-      .carousel-slide > div:first-child {
-        padding: 1.5rem !important;
-        height: auto !important;
-        background: white !important;
+      .slide-text {
+        flex: 1 !important;
+        padding: 1.25rem !important;
         order: 1 !important;
+        overflow-y: auto !important;
+        height: auto !important;
       }
 
-      .carousel-slide > div:last-child {
-        display: block !important;
-        height: 250px !important;
-        background: white !important;
+      .slide-img {
+        height: 210px !important;
+        flex-shrink: 0 !important;
         order: 2 !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        overflow: hidden;
+        overflow: hidden !important;
+        position: relative !important;
+        width: 100% !important;
       }
 
-      .carousel-slide > div:last-child img {
+      .slide-img img {
         width: 100% !important;
         height: 100% !important;
         object-fit: cover !important;
+        object-position: center !important;
       }
 
       .carousel-slide h2 {
-        font-size: 1.5rem !important;
-        line-height: 1.2;
-        margin-bottom: 1rem !important;
+        font-size: 1.4rem !important;
+        line-height: 1.2 !important;
+        margin-bottom: 0.6rem !important;
         color: var(--primary) !important;
       }
 
-      .carousel-slide span {
-        display: block !important;
+      .carousel-slide h2 span {
+        font-size: 1.2rem !important;
+        margin-bottom: 0.2rem !important;
       }
 
       .carousel-slide p {
-        font-size: 0.9rem !important;
-        margin-bottom: 1.5rem !important;
-        color: #666 !important;
-        line-height: 1.6;
+        font-size: 0.85rem !important;
+        margin-bottom: 0.75rem !important;
+        color: #555 !important;
+        line-height: 1.5 !important;
       }
 
       .carousel-slide ul {
-        margin-bottom: 1.5rem !important;
+        margin-bottom: 0.6rem !important;
         list-style: none !important;
         padding: 0 !important;
       }
 
       .carousel-slide li {
-        font-size: 0.85rem !important;
-        margin-bottom: 0.5rem !important;
+        font-size: 0.8rem !important;
+        margin-bottom: 0.3rem !important;
       }
 
       .carousel-slide a {
-        padding: 0.6rem 1rem !important;
-        font-size: 0.8rem !important;
+        padding: 0.5rem 0.9rem !important;
+        font-size: 0.75rem !important;
         display: inline-block !important;
-        margin-bottom: 0.6rem !important;
-        margin-right: 0.5rem !important;
-        max-width: calc(100% - 0.5rem);
+        margin-bottom: 0.4rem !important;
+        margin-right: 0.3rem !important;
+      }
+
+      /* Show dots on mobile */
+      .carousel-dot {
+        display: block !important;
+        width: 8px !important;
+        height: 8px !important;
       }
 
       [style*="position: absolute; bottom: 30px"] {
-        display: none !important;
-      }
-
-      /* Hide carousel dots on mobile */
-      .carousel-dot {
-        display: none !important;
+        display: flex !important;
+        bottom: 12px !important;
       }
 
       [style*="grid-template-columns: 1fr 1fr"] {
@@ -1023,18 +980,77 @@
         padding: 0.3rem 0 !important;
       }
 
-      .dropdown-menu {
+      /* ── Mobile Card Carousels ── */
+      .carousel-viewport {
+        display: block !important;
+        overflow: hidden !important;
+        position: relative !important;
+        grid-template-columns: none !important;
+        gap: 0 !important;
+      }
+
+      .carousel-track {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        grid-template-columns: none !important;
+        gap: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+      }
+
+      .carousel-track > * {
+        flex: 0 0 85% !important;
+        max-width: 85% !important;
+        width: 85% !important;
+        min-width: 0 !important;
+        margin-right: 12px !important;
+        margin-left: 0 !important;
+        box-sizing: border-box !important;
+      }
+
+      .carousel-nav {
         display: none !important;
       }
 
-      .dropdown.active .dropdown-menu {
-        display: block !important;
+      .carousel-side-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.55);
+        border: none;
+        color: rgba(31, 58, 95, 0.6);
+        font-size: 1.3rem;
+        font-weight: 400;
+        line-height: 1;
+        padding: 0;
+        cursor: pointer;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+        flex-shrink: 0;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        transition: background 0.2s, color 0.2s;
       }
 
-      .dropdown-toggle {
-        display: block;
-        width: 100%;
-        text-align: left;
+      .carousel-side-arrow:active {
+        background: rgba(255, 255, 255, 0.85);
+        color: var(--primary);
+      }
+
+      .carousel-side-prev {
+        left: 4px;
+      }
+
+      .carousel-side-next {
+        right: 4px;
       }
     }
   </style>
@@ -1050,8 +1066,8 @@
       <ul class="navbar-menu" id="mobileMenu">
         <li><a href="#home" onclick="closeMobileMenu()">Home</a></li>
         <li><a href="#companies" onclick="closeMobileMenu()">About</a></li>
-        <li class="dropdown" style="border-bottom: none !important;">
-          <a href="#" class="dropdown-toggle" onclick="event.preventDefault(); this.closest('.dropdown').classList.toggle('active');">Facilities ▼</a>
+        <li class="dropdown">
+          <span class="dropdown-toggle">Facilities ▼</span>
           <ul class="dropdown-menu">
             <li><a href="foundry.html" onclick="this.closest('.dropdown').classList.remove('active');">🏭 Ellem Foundry</a></li>
             <li><a href="engineering.html" onclick="this.closest('.dropdown').classList.remove('active');">⚙️ Ellem Engineering</a></li>
@@ -1088,22 +1104,138 @@
       body.classList.remove('menu-open');
     }
 
-    // Handle dropdown toggle on mobile
+    // Dropdown toggle — single handler, works on desktop and mobile
     document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
       toggle.addEventListener('click', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         const dropdown = this.closest('.dropdown');
-        dropdown.classList.toggle('active');
+        const isActive = dropdown.classList.contains('active');
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+        if (!isActive) dropdown.classList.add('active');
       });
     });
 
-    // Close dropdown when clicking a link
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.dropdown')) {
+        document.querySelectorAll('.dropdown').forEach(d => d.classList.remove('active'));
+      }
+    });
+
+    // Close dropdown when a menu link is clicked
     document.querySelectorAll('.dropdown-menu a').forEach(link => {
       link.addEventListener('click', function() {
-        const dropdown = this.closest('.dropdown');
-        dropdown.classList.remove('active');
+        this.closest('.dropdown').classList.remove('active');
       });
     });
+
+    // ── Mobile Card Carousels ──
+    (function () {
+      class MobileCarousel {
+        constructor(el) {
+          this.el = el;
+          this.cards = [...el.children];
+          this.n = this.cards.length;
+          if (this.n < 2) return;
+          this.idx = 0;
+          this.pos = 1;
+          this.dragging = false;
+          this.tx = 0;
+          this.ty = 0;
+          this.build();
+        }
+
+        build() {
+          const track = document.createElement('div');
+          track.className = 'carousel-track';
+
+          const cloneLast = this.cards[this.n - 1].cloneNode(true);
+          cloneLast.setAttribute('aria-hidden', 'true');
+          track.appendChild(cloneLast);
+
+          this.cards.forEach(c => track.appendChild(c));
+
+          const cloneFirst = this.cards[0].cloneNode(true);
+          cloneFirst.setAttribute('aria-hidden', 'true');
+          track.appendChild(cloneFirst);
+
+          this.track = track;
+          this.el.appendChild(track);
+          this.el.classList.add('carousel-viewport');
+
+          // ── Side arrows (inside viewport, vertically centered) ──
+          const prevBtn = document.createElement('button');
+          prevBtn.className = 'carousel-side-arrow carousel-side-prev';
+          prevBtn.innerHTML = '&#8249;';
+          prevBtn.setAttribute('aria-label', 'Previous');
+          prevBtn.addEventListener('click', () => this.move(-1));
+
+          const nextBtn = document.createElement('button');
+          nextBtn.className = 'carousel-side-arrow carousel-side-next';
+          nextBtn.innerHTML = '&#8250;';
+          nextBtn.setAttribute('aria-label', 'Next');
+          nextBtn.addEventListener('click', () => this.move(1));
+
+          this.el.appendChild(prevBtn);
+          this.el.appendChild(nextBtn);
+
+          // ── Touch swipe ──
+          track.addEventListener('touchstart', e => {
+            this.dragging = true;
+            this.tx = e.touches[0].clientX;
+            this.ty = e.touches[0].clientY;
+          }, { passive: true });
+
+          track.addEventListener('touchend', e => {
+            if (!this.dragging) return;
+            this.dragging = false;
+            const dx = e.changedTouches[0].clientX - this.tx;
+            const dy = e.changedTouches[0].clientY - this.ty;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+              this.move(dx < 0 ? 1 : -1);
+            }
+          });
+
+          this.render(false);
+        }
+
+        slideW() {
+          return this.el.offsetWidth * 0.85 + 12;
+        }
+
+        render(animate = true) {
+          this.track.style.transition = animate
+            ? 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+            : 'none';
+          this.track.style.transform = `translateX(${-this.pos * this.slideW()}px)`;
+        }
+
+        move(dir) {
+          this.pos += dir;
+          this.idx = ((this.idx + dir) % this.n + this.n) % this.n;
+          this.render(true);
+
+          if (this.pos === this.n + 1) {
+            setTimeout(() => { this.pos = 1; this.render(false); }, 420);
+          } else if (this.pos === 0) {
+            setTimeout(() => { this.pos = this.n; this.render(false); }, 420);
+          }
+        }
+
+        goto(i) {
+          this.idx = i;
+          this.pos = i + 1;
+          this.render(true);
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-mobile-carousel]').forEach(el => {
+          el._mobileCarousel = new MobileCarousel(el);
+        });
+      });
+    })();
   </script>
 
   <!-- Carousel/Slider Banner Section -->
@@ -1113,7 +1245,7 @@
       
       <!-- Slide 1: EXPERTISE & GLOBAL TRUST -->
       <div class="carousel-slide active-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f8f9fa 0%, #f0f2f5 100%); position: absolute; width: 100%; opacity: 1; transition: opacity 0.8s ease;">
-        <div style="padding: 6rem 4rem; z-index: 2;">
+        <div class="slide-text" style="padding: 6rem 4rem; z-index: 2;">
           <div style="max-width: 500px;">
             <h2 style="font-size: 3.5rem; line-height: 1.1; margin-bottom: 1.5rem; color: var(--primary);">
               <span style="color: var(--accent); display: block; font-size: 3rem; font-weight: 700; margin-bottom: 0.5rem;">26+ YEARS</span>
@@ -1136,7 +1268,7 @@
             </div>
           </div>
         </div>
-        <div style="position: relative; height: 100%; overflow: hidden; background: white; display: flex; align-items: center; justify-content: center;">
+        <div class="slide-img" style="position: relative; height: 100%; overflow: hidden; background: white; display: flex; align-items: center; justify-content: center;">
           <img src="./images/banner1-manufacturing.png" alt="Precision Manufacturing" style="width: 100%; height: 100%; object-fit: cover; object-position: center;">
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(248, 181, 0, 0.05), rgba(212, 160, 23, 0.05));"></div>
         </div>
@@ -1144,11 +1276,11 @@
 
       <!-- Slide 2: PRECISION ENGINEERING -->
       <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f0f2f5 0%, #f8f9fa 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
-        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0f2ff 0%, #e0e7ff 100%); order: 2;">
+        <div class="slide-img" style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0f2ff 0%, #e0e7ff 100%); order: 2;">
           <img src="./images/banner2-control-system.png" alt="Engineering Excellence" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(31, 58, 95, 0.08), rgba(42, 79, 122, 0.08));"></div>
         </div>
-        <div style="padding: 4rem 4rem; z-index: 2;">
+        <div class="slide-text" style="padding: 4rem 4rem; z-index: 2;">
           <div style="max-width: 500px;">
             <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
               <span style="color: var(--accent);">PRECISION</span><br>ENGINEERING
@@ -1171,7 +1303,7 @@
 
       <!-- Slide 3: SUSTAINABILITY & INNOVATION -->
       <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f8f9fa 0%, #f0f2f5 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
-        <div style="padding: 4rem 4rem; z-index: 2;">
+        <div class="slide-text" style="padding: 4rem 4rem; z-index: 2;">
           <div style="max-width: 500px;">
             <h2 style="font-size: 2.5rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
               <span style="color: var(--accent);">INDUSTRIAL</span><br>INFRASTRUCTURE
@@ -1187,7 +1319,7 @@
             </ul>
           </div>
         </div>
-        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #f0ffe0 0%, #e8f5e9 100%);">
+        <div class="slide-img" style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #f0ffe0 0%, #e8f5e9 100%);">
           <img src="./images/banner3-industrial.png" alt="Industrial Solutions" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(31, 58, 95, 0.08), rgba(42, 79, 122, 0.08));"></div>
         </div>
@@ -1195,7 +1327,7 @@
 
       <!-- Slide 4: ADVANCED MANUFACTURING CAPABILITIES -->
       <div class="carousel-slide" style="display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 0; height: 100%; background: linear-gradient(to right, #f0f2f5 0%, #f8f9fa 100%); position: absolute; width: 100%; opacity: 0; transition: opacity 0.8s ease;">
-        <div style="padding: 4rem 4rem; z-index: 2;">
+        <div class="slide-text" style="padding: 4rem 4rem; z-index: 2;">
           <div style="max-width: 500px;">
             <h2 style="font-size: 2.8rem; line-height: 1.2; margin-bottom: 1.5rem; color: var(--primary);">
               <span style="color: var(--accent);">WORLD-CLASS</span><br>MANUFACTURING
@@ -1211,7 +1343,7 @@
             </a>
           </div>
         </div>
-        <div style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0e7ff 0%, #f0e7ff 100%);">
+        <div class="slide-img" style="position: relative; height: 100%; overflow: hidden; background: linear-gradient(135deg, #e0e7ff 0%, #f0e7ff 100%);">
           <img src="./images/banner4-equipment.png" alt="Manufacturing Excellence" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.95;">
           <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(248, 181, 0, 0.1), rgba(212, 160, 23, 0.1));"></div>
         </div>
@@ -1260,6 +1392,20 @@
       
       // Auto-advance slides every 6 seconds
       setInterval(nextSlide, 6000);
+
+      // Touch swipe support for mobile
+      const _hw = document.querySelector('.carousel-wrapper');
+      if (_hw) {
+        let _sx = 0;
+        _hw.addEventListener('touchstart', e => { _sx = e.touches[0].clientX; }, { passive: true });
+        _hw.addEventListener('touchend', e => {
+          const dx = e.changedTouches[0].clientX - _sx;
+          if (Math.abs(dx) > 40) {
+            currentSlide = (currentSlide + (dx < 0 ? 1 : -1) + slides.length) % slides.length;
+            showSlide(currentSlide);
+          }
+        });
+      }
     </script>
   </section>
 
@@ -1301,7 +1447,7 @@
         </ul>
 
         <!-- Strengths Cards Inside About Box -->
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); margin-bottom: 2rem;">
           <div style="background: rgba(255,255,255,0.95); padding: 1.5rem; border-radius: 8px; border-left: 5px solid var(--accent);">
             <h4 style="color: var(--primary); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Engineering Excellence</h4>
             <p style="color: var(--text-light); line-height: 1.6; font-size: 0.9rem; margin: 0;">
@@ -1318,7 +1464,7 @@
 
         <!-- Vision, Mission, Quality Policy Section -->
         <div style="padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2);">
-          <div class="about-vision-mission-quality" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+          <div class="about-vision-mission-quality" data-mobile-carousel style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
             <!-- Vision -->
             <div style="background: rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 8px; border-left: 4px solid rgba(248, 181, 0, 0.6);">
               <h4 style="color: var(--accent); font-size: 1rem; font-weight: 700; margin-bottom: 0.8rem; margin-top: 0;">Our Vision</h4>
@@ -1350,7 +1496,7 @@
       </div>
 
       <!-- Companies Grid -->
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+      <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
         <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 8px 24px rgba(0,0,0,0.08); transition: all 0.3s ease; border-top: 5px solid var(--accent); hover:shadow-lg;" onmouseover="this.style.boxShadow='0 12px 32px rgba(0,0,0,0.12)'; this.style.transform='translateY(-5px)'" onmouseout="this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'; this.style.transform='translateY(0)'">
           <div style="background: linear-gradient(135deg, #fff9e6 0%, #ffe6cc 100%); padding: 2.5rem; text-align: center;">
             <div style="font-size: 3.5rem; margin-bottom: 1rem;">🏭</div>
@@ -1509,7 +1655,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1rem;">Precision equipment for advanced manufacturing operations</p>
 
         <!-- Machinery Grid -->
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 2rem;">
           <!-- CNC Turning -->
           <div style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.08); border-left: 4px solid var(--accent); transition: all 0.3s;">
             <div style="background: linear-gradient(135deg, var(--primary) 0%, #2a4f7a 100%); padding: 1.5rem; color: white;">
@@ -1670,7 +1816,7 @@
         </h3>
         <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem; font-size: 1rem;">Industry-grade materials sourced from premium suppliers worldwide</p>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <!-- Stainless Steel -->
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-top: 3px solid var(--accent);">
             <h4 style="color: var(--primary); font-size: 1.2rem; margin-bottom: 1rem; margin-top: 0;">🔩 Stainless Steel</h4>
@@ -1768,7 +1914,7 @@
         <h2>Our Products</h2>
       </div>
 
-      <div class="products-grid">
+      <div class="products-grid" data-mobile-carousel>
         <div class="product-card">
           <div class="product-image">
             <img src="./images/product-gauge.png" alt="Gauge Valves" style="width:100%; height:100%; object-fit:contain;">
@@ -2051,7 +2197,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
           Reliable valve components and control systems engineered to withstand extreme pressures, temperatures, and corrosive environments in upstream, midstream, and downstream operations.
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--accent);">
             <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Ball Valves</h4>
             <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">High-pressure ball valves for flow control in drilling, production, and pipeline applications. Available in multiple sizes and materials.</p>
@@ -2075,7 +2221,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
           Corrosion-resistant valve components and control systems specifically designed to handle aggressive chemical environments and maintain process integrity.
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid var(--secondary);">
             <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Butterfly Valves</h4>
             <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Efficient butterfly valves for chemical flow control. Compact design with excellent sealing for process applications.</p>
@@ -2099,7 +2245,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
           Critical valve components and precision controls supporting thermal, hydro, and renewable power generation systems with uninterrupted reliability.
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #ff6b6b;">
             <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Control Valves</h4>
             <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Precise steam and water control valves for thermal power plants. Engineered for high-temperature, high-pressure operations.</p>
@@ -2123,7 +2269,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
           Precision-engineered components for automotive fluid systems including fuel, hydraulic, and coolant control with stringent OEM specifications.
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #4ecdc4;">
             <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Fuel System Valves</h4>
             <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">OEM-quality fuel shut-off and control valves meeting automotive safety and performance standards.</p>
@@ -2147,7 +2293,7 @@
         <p style="text-align: center; color: var(--text-light); margin-bottom: 2.5rem; font-size: 1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
           Corrosion-resistant valve systems for water treatment, distribution, and wastewater management ensuring safe, efficient fluid control.
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
           <div style="background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.06); border-left: 4px solid #95e1d3;">
             <h4 style="color: var(--primary); font-size: 1.1rem; margin-bottom: 1rem; margin-top: 0;">Isolation Valves</h4>
             <p style="color: var(--text-dark); line-height: 1.7; margin: 0; font-size: 0.95rem;">Main line isolation valves for water distribution networks. Durable and corrosion-resistant for long service life.</p>
@@ -2174,10 +2320,17 @@
       document.getElementById('power-content').style.display = 'none';
       document.getElementById('automotive-content').style.display = 'none';
       document.getElementById('water-content').style.display = 'none';
-      
+
       // Show selected industry
-      document.getElementById(industry + '-content').style.display = 'block';
-      
+      const content = document.getElementById(industry + '-content');
+      content.style.display = 'block';
+
+      // Re-render any mobile carousel inside (was hidden during init, so slideW was 0)
+      const carouselEl = content.querySelector('[data-mobile-carousel]');
+      if (carouselEl && carouselEl._mobileCarousel && carouselEl._mobileCarousel.track) {
+        carouselEl._mobileCarousel.render(false);
+      }
+
       // Update button styles
       const buttons = document.querySelectorAll('.industry-tab');
       buttons.forEach(btn => {
@@ -2201,7 +2354,7 @@
         <div>
           <h3 style="color: var(--primary); text-align: center; margin-bottom: 3rem; font-size: 1.8rem;">📞 Contact Information</h3>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+          <div data-mobile-carousel style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
             <!-- Ellem Engineering -->
             <div style="background: linear-gradient(135deg, rgba(31, 58, 95, 0.05) 0%, rgba(212, 160, 23, 0.05) 100%); padding: 2rem; border-radius: 12px; border-left: 4px solid var(--accent);">
               <h4 style="color: var(--primary); margin-bottom: 1rem; font-size: 1.3rem;">⚙️ Ellem Engineering</h4>
